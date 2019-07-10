@@ -1,0 +1,12 @@
+spring:
+    datasource:
+        url: jdbc:mariadb://localhost:3306/mariadb
+        driverClassName: org.mariadb.jdbc.Driver
+        username: mariadb
+        password: mariadb
+    jpa:
+        # database-platform: org.hibernate.dialect.mariadb
+        hibernate:
+            ddl-auto: create
+server:
+    port: 9000
