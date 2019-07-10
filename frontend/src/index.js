@@ -3,6 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './serviceWorker';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './reducers/index'
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
