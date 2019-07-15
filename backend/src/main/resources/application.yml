@@ -1,12 +1,23 @@
 spring:
+ 
+
     datasource:
-        url: jdbc:mariadb://localhost:3306/mariadb
+        url: jdbc:mariadb://bitcamp190705.cx61b3dwwksw.ap-northeast-2.rds.amazonaws.com:3306/bitcamp190705
         driverClassName: org.mariadb.jdbc.Driver
-        username: mariadb
-        password: mariadb
+        username: bitcamp190705
+        password: bitcamp190705
     jpa:
         # database-platform: org.hibernate.dialect.mariadb
+        generate-ddl: true
+        open-in-view: false
+        show-sql: true
         hibernate:
             ddl-auto: create
-server:
-    port: 9000
+            
+# server:
+#     port: 9000
+
+#실행되는 SQL문을 보여줄 것인가?
+
+
+#데이터베이스는 무엇을 사용하는가?
