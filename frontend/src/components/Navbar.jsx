@@ -6,6 +6,7 @@ import Board from '../containers/Borad.jsx'
 import Jumbotron from './Jumbotron'
 import "./Navbar.css"
 import Login from '../containers/Login.jsx'
+import Join from "../containers/Join.jsx";
  
 
 class Navbar extends Component {
@@ -28,7 +29,7 @@ render() {
       <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
         <MDBNavbarNav left>
           <MDBNavItem>
-             <MDBNavLink to="/">홈</MDBNavLink>
+             <MDBNavLink to="/home">홈</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
             <MDBNavLink to="#!">챔피언 분석</MDBNavLink>
@@ -53,15 +54,15 @@ render() {
         </MDBBtn>
        
         <MDBBtn  color="#ffebee red lighten-5" size="sm">
-            <Link to="/borad" >회원가입</Link>
+            <Link to="/join" >회원가입</Link>
         </MDBBtn>
         
         </MDBNavbarNav>
       </MDBCollapse>
     </MDBNavbar>
-    <Route path="/" component={Jumbotron}/>
+    <Route path="/home" component={Jumbotron}/>
     <Route path="/login" component={Login}/>
-
+    <Route path="/join" component={Join}/>
     </Router>
     );
   }

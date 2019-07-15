@@ -1,7 +1,6 @@
 import React from 'react';
 import '../assets/css/App.css'
 import Navbar from '../components/Navbar'
-import Jumbotron from '../components/Jumbotron'
 
 function App() {
   const style ={

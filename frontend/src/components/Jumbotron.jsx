@@ -29,7 +29,6 @@ const JumbotronPage = () => {
             <MDBCardImage
               className="img-fluid"
               src="http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg" />
-           
           </MDBJumbotron>
         </MDBCol>
       </MDBRow>
