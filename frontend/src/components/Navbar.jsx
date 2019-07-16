@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
 MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBBtn ,MDBBtnGroup  } from "mdbreact";
-import Board from '../containers/Borad.jsx'
+import Board from '../containers/Board'
 import Jumbotron from './Jumbotron'
 import "./Navbar.css"
 import Login from '../containers/Login.jsx'
@@ -29,7 +29,7 @@ render() {
       <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
         <MDBNavbarNav left>
           <MDBNavItem>
-             <MDBNavLink to="/home">홈</MDBNavLink>
+             <MDBNavLink to="/">홈</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
             <MDBNavLink to="#!">챔피언 분석</MDBNavLink>
@@ -41,7 +41,7 @@ render() {
             <MDBNavLink to="#!">랭킹</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
-            <MDBNavLink to="#!">게시판</MDBNavLink>
+            <MDBNavLink to="/board">게시판</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
     
@@ -60,9 +60,10 @@ render() {
         </MDBNavbarNav>
       </MDBCollapse>
     </MDBNavbar>
-    <Route path="/home" component={Jumbotron}/>
+    <Route path="/" exact component={Jumbotron}/>
     <Route path="/login" component={Login}/>
     <Route path="/join" component={Join}/>
+    <Route path="/board" component={Board}/>
     </Router>
     );
   }
