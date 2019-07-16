@@ -2,6 +2,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - FuctionMain",
+            "request": "launch",
+            "mainClass": "team.lol.backend.FuctionMain",
+            "projectName": "backend"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ConsumerMain",
+            "request": "launch",
+            "mainClass": "team.lol.backend.ConsumerMain",
+            "projectName": "backend"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - FunctionalMainClass",
+            "request": "launch",
+            "mainClass": "team.lol.backend.FunctionalMainClass",
+            "projectName": "backend"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Application",
             "request": "launch",
             "mainClass": "team.lol.backend.Application",

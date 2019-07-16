@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import "./Login.css"
 import axios from 'axios';
 
 import {
@@ -18,16 +17,17 @@ class Login extends Component{
     constructor(){
         super()
         this.state={
-            userId : '',
+            email : '',
             password : ''
         }
         this.Login = this.Login.bind(this)
-        this.idChange = this.idChange.bind(this)
+        this.emailChange = this.emailChange.bind(this)
         this.pwChange = this.pwChange.bind(this)
+        
     }
 
-    idChange(e){
-        this.setState({userId: e.target.value})
+    emailChange(e){
+        this.setState({email: e.target.value})
     }
 
     pwChange(e){
@@ -36,12 +36,22 @@ class Login extends Component{
 
     Login(e){
         e.preventDefault();
-        axios.post('http://localhost:9000/users/login')
-        .then(res=>{
-            alert('성공')
+        let data={
+            email : this.state.email,
+            password : this.state.password
+        }
+
+        axios.post('http://localhost:8080/users/login', data)
+
+        .then(res=> {
+            if (res.data) {
+              console.dir(res.data)
+            } else {
+                alert('아이디나 비밀번호가 틀렸습니다.')
+            }
         })
         .catch(e=>{
-            alert('실패')
+            alert('axios연동실패')
         })
         
     }
@@ -61,12 +71,14 @@ class Login extends Component{
                     <form>
                       <div className="grey-text">
                         <MDBInput
-                          label="Type your ID"
-                          icon="user"
-                          group
-                          type="text"
-                          onChange={this.idChange}
-                          validate
+                           label="Your email"
+                           icon="envelope"
+                           group
+                           type="email"
+                           validate
+                           error="wrong"
+                           success="right"
+                           onChange={this.emailChange}
                         />
                         <MDBInput
                           label="Type your password"

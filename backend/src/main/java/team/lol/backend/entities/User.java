@@ -1,4 +1,4 @@
-package team.lol.backend.entityes;
+package team.lol.backend.entities;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -29,10 +29,9 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Uno;
-    @Column(name = "user_id", nullable = false, unique = true)  private  String userId;
     @Column(name = "user_name",nullable = false) private String userName;
     @Column(nullable = false ) String password;
-    @Column(nullable = false ) String email;
+    @Column(nullable = false, unique = true) String email;
     @CreationTimestamp private Timestamp regdate;
     
 }
