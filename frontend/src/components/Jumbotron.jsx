@@ -1,6 +1,5 @@
 import React from "react";
 import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol,  MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText } from "mdbreact";
-import "./Jumbotron.css"
 const JumbotronPage = () => {
     const style ={
         background : ''

@@ -10,9 +10,9 @@ spring:
         # database-platform: org.hibernate.dialect.mariadb
         generate-ddl: true
         open-in-view: false
-        show-sql: true
+        # show-sql: true
         hibernate:
-            ddl-auto: create
+            ddl-auto: update
             
 # server:
 #     port: 9000
@@ -20,4 +20,4 @@ spring:
 #실행되는 SQL문을 보여줄 것인가?
 
 
-#데이터베이스는 무엇을 사용하는가?
+#데이터베이스는 무엇을 사용하는가?r
