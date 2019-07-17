@@ -1,6 +1,7 @@
 import React from 'react';
 import '../assets/css/App.css'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
 function App() {
   const style ={
@@ -9,6 +10,7 @@ function App() {
   return (
     <div className="App" style={style}>
       <Navbar/>
+      <Footer/>
     </div>
   );
 }

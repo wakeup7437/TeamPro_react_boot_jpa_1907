@@ -1,5 +1,5 @@
 import React from 'react';
-import { MDBIcon, MDBSideNavCat, MDBSideNavNav, MDBSideNav, MDBSideNavLink, MDBContainer, MDBRow, MDBBtn } from 'mdbreact';
+import { MDBIcon, MDBContainer, MDBRow, MDBBtn,MDBPageNav } from 'mdbreact';
 
 class SideNav extends React.Component {
     state = {
@@ -16,9 +16,10 @@ class SideNav extends React.Component {
         const { isOpen } = this.state;
         return (
             <MDBContainer>
-                <MDBRow left>
-                    <MDBBtn onClick={this.handleToggle}><MDBIcon icon="bars" size="5x" /></MDBBtn>
+                <MDBRow>
+                    <MDBBtn onClick={this.handleToggle}><MDBIcon icon="bars" size="3x" /></MDBBtn>
                 </MDBRow>
+                <MDBPageNav>ddd</MDBPageNav>
             </MDBContainer>
         );
       }

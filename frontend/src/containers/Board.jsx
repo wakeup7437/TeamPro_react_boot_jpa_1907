@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import SideNav from '../components/SideNav'
-import {MDBDataTable,MDBContainer,MDBCol,MDBRow,MDBTableHead,MDBTableBody,MDBTable} from 'mdbreact'
+import {MDBDataTable,MDBContainer,MDBCol,MDBRow,MDBTableHead,MDBTableBody,MDBTable,MDBCard} from 'mdbreact'
 
 class Board extends Component{
     constructor(){
         super();
 
     }
+    componentDidMount(){
+
+    }
+
     render(){
         const data = {
             columns: [
@@ -62,7 +66,9 @@ class Board extends Component{
                 office: 'Tokyo',
                 age: '63',
                 date: '2011/07/25',
-                salary: '$170'
+                salary: '$170',
+                /////////////////
+                onClick:"{test}"
               },
               {
                 name: 'Ashton Cox',
@@ -509,20 +515,21 @@ class Board extends Component{
         return(
             <>
             <MDBRow>
-                <MDBCol><SideNav class="sticky" position="sticky"/></MDBCol>
+                <MDBCol><SideNav/></MDBCol>
                 <MDBCol md="8">
-                <MDBContainer className="white col-md-8">
-
+                <MDBContainer className="white col-md-10">
+                    <MDBCard></MDBCard>
                 
-                    <MDBTable responsive
+                    <MDBDataTable responsive
                         striped
                         bordered
                         hover
                         sorting={false}
+                        data={data}
                     >      
                       <MDBTableHead columns={data.columns} />
                       <MDBTableBody rows={data.rows}/>
-                    </MDBTable>
+                    </MDBDataTable>
                 
                 </MDBContainer>
                 </MDBCol>
