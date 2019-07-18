@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - ArrayListStudy",
+            "request": "launch",
+            "mainClass": "team.lol.backend.ArrayListStudy",
+            "projectName": "backend"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ConsumerAndThenExample",
+            "request": "launch",
+            "mainClass": "team.lol.backend.ConsumerAndThenExample",
+            "projectName": "backend"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - FuctionMain",
             "request": "launch",
             "mainClass": "team.lol.backend.FuctionMain",

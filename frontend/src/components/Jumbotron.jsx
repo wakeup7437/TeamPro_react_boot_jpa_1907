@@ -1,5 +1,6 @@
 import React from "react";
-import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol,  MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText } from "mdbreact";
+import "../assets/css/Jumbotron.css"
+import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol,  MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText,MDBCarousel, MDBCarouselCaption, MDBCarouselInner, MDBCarouselItem, MDBView, MDBMask } from "mdbreact";
 const JumbotronPage = () => {
     const style ={
         background : ''
@@ -25,9 +26,45 @@ const JumbotronPage = () => {
               </MDBBtn>
             </MDBCardBody>
 
-            <MDBCardImage
-              className="img-fluid"
-              src="http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg" />
+            <MDBContainer>
+      <MDBCarousel
+        activeItem={1}
+        length={3}
+        showControls={true}
+        showIndicators={true}
+        className="z-depth-1"
+      >
+        <MDBCarouselInner>
+          <MDBCarouselItem itemId="1">
+            <MDBView>
+              <img
+                className="d-block w-100"
+                src="https://mdbootstrap.com/img/Photos/Slides/img%20(130).jpg"
+                alt="First slide"
+              />
+            </MDBView>
+          </MDBCarouselItem>
+          <MDBCarouselItem itemId="2">
+            <MDBView>
+              <img
+                className="d-block w-100"
+                src="https://mdbootstrap.com/img/Photos/Slides/img%20(129).jpg"
+                alt="Second slide"
+              />
+            </MDBView>
+          </MDBCarouselItem>
+          <MDBCarouselItem itemId="3">
+            <MDBView>
+              <img
+                className="d-block w-100"
+                src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg"
+                alt="Third slide"
+              />
+            </MDBView>
+          </MDBCarouselItem>
+        </MDBCarouselInner>
+      </MDBCarousel>
+    </MDBContainer>
           </MDBJumbotron>
         </MDBCol>
       </MDBRow>
