@@ -4,6 +4,16 @@
     color: green !important
 } */
 .btn.btn-sm {
-    padding: 0.2rem 1.1rem;
+    padding: 0.2 1.1rem !important;
     font-size: 0.9rem !important;
+
+}
+.navbar .dropdown-menu a {
+    padding: 10px;
+    font-size: 0.9375rem;
+    font-weight: 300;
+    color: black !important;
+}
+.navbar-dark .navbar-nav .btn-group .btn.btn-blue.Ripple-parent .nav-link{
+    color: rgba(255,255,255,1) !important;
 }

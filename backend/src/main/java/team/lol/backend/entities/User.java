@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -30,8 +31,9 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Uno;
     @Column(name = "user_name",nullable = false) private String userName;
-    @Column(nullable = false ) String password;
+    @Column(nullable = false) String password;
     @Column(nullable = false, unique = true) String email;
     @CreationTimestamp private Timestamp regdate;
+    @UpdateTimestamp private Timestamp updatedate;
     
 }

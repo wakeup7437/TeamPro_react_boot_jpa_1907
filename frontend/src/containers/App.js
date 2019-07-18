@@ -6,6 +6,7 @@ import Footer from '../components/Footer'
 function App() {
   const style ={
     background : '#2E9AFE'
+    
 }
   return (
     <div className="App" style={style}>

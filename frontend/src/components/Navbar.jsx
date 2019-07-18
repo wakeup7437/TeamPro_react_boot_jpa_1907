@@ -1,27 +1,59 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
 MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBBtn ,MDBBtnGroup  } from "mdbreact";
 import Board from '../containers/Board'
 import Jumbotron from './Jumbotron'
 import "./Navbar.css"
-import Login from '../containers/Login.jsx'
 import Join from "../containers/Join.jsx";
+import Mypage from "../containers/Mypage.jsx";
+import Login from "../containers/Login.jsx"
+
  
 
 class Navbar extends Component {
-state = {
-  isOpen: false
-};
+  constructor(props){
+    super(props)
+    this.state = {
+      isOpen: false,
+      login: false,
+      check: localStorage.getItem('uno'),
+
+    };
+  }
 
 toggleCollapse = () => {
   this.setState({ isOpen: !this.state.isOpen });
 }
 
+
+  /* componentWillMount = () => {
+    if (localStorage.getItem('uno')) {
+      this.setState({
+        login:true
+      }) 
+    } else{
+        this.setState({
+          login:false
+      }) 
+    }
+  } */
+
+
+
 render() {
+  console.log('hi')
+const bstyle={
+  padding:"13.44px 25px"
+}
+const astyle={
+  padding:0,
+}
+
   return (
-      <Router>
-    <MDBNavbar color="#0091ea light-blue accent-4" dark expand="md">
+    <Router >
+    <div style={{height : 120 }}></div>
+    <MDBNavbar color="#0091ea light-blue accent-4 fixed-top" dark expand="md">
       <MDBNavbarBrand>
         <strong className="white-text">GC.KR</strong>
       </MDBNavbarBrand>
@@ -43,27 +75,41 @@ render() {
           <MDBNavItem>
             <MDBNavLink to="/board">게시판</MDBNavLink>
           </MDBNavItem>
-          <MDBNavItem>
-    
-          </MDBNavItem>
         </MDBNavbarNav>
-        <MDBNavbarNav right  >
-       
-        <MDBBtn color="#ffebee red lighten-5" size="sm">
-            <Link to="/login" >로그인</Link>
-        </MDBBtn>
-       
-        <MDBBtn  color="#ffebee red lighten-5" size="sm">
-            <Link to="/join" >회원가입</Link>
-        </MDBBtn>
-        
+        <MDBNavbarNav right>
+            {this.state.check ? 
+          <MDBBtnGroup>   
+            <MDBBtn  color="blue" style={astyle}>
+            <MDBNavLink to="/Mypage" style={bstyle}>마이페이지</MDBNavLink>
+            </MDBBtn>
+            <MDBDropdown >
+              <MDBDropdownToggle caret color="yellow"/>
+              <MDBDropdownMenu >
+                <MDBDropdownItem >
+                <MDBNavLink to="/mypage" color="yellow">로그아웃</MDBNavLink>
+                </MDBDropdownItem>
+                <MDBDropdownItem>
+                <MDBNavLink to="/mypage">마이페이지</MDBNavLink>
+                </MDBDropdownItem>
+              </MDBDropdownMenu>
+            </MDBDropdown>
+          </MDBBtnGroup> 
+          : 
+          <MDBBtnGroup>
+            <MDBBtn  color="blue" style={astyle}>
+           {localStorage.clear()}
+            <MDBNavLink to="/login" style={bstyle}>로그인</MDBNavLink>
+            </MDBBtn>
+          </MDBBtnGroup>} 
+            
         </MDBNavbarNav>
       </MDBCollapse>
     </MDBNavbar>
     <Route path="/" exact component={Jumbotron}/>
-    <Route path="/login" component={Login}/>
+    <Route path="/login" component={Login} />
     <Route path="/join" component={Join}/>
     <Route path="/board" component={Board}/>
+    <Route path="/mypage" component={Mypage}/>
     </Router>
     );
   }

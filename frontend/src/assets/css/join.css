@@ -1,0 +1,5 @@
+.md-form .prefix ~ input, .md-form .prefix ~ textarea {
+    margin-left: 1.5rem !important;
+    width: calc(100% - 2.5rem);
+    
+}

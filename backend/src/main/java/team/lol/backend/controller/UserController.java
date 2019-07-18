@@ -1,10 +1,12 @@
 package team.lol.backend.controller;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,8 +36,36 @@ public class UserController {
     }
 
     @PostMapping(value="join")
-    public void Join(@RequestBody User user) {
-        System.out.println("접속");
+    public HashMap<String,String> Join(@RequestBody User user) {
+        // System.out.println("접속");
+        HashMap<String,String> map = new HashMap<>();
+        User entity = new User();
+        // System.out.println(user.getUserName());
+        // System.out.println(user.getPassword());
+        // System.out.println(user.getEmail());
+        // System.out.println(user);
+        entity.setEmail(user.getEmail());
+        entity.setPassword(user.getPassword());
+        entity.setUserName(user.getUserName());
+        // entity.setUno(user.getUno());
+        // entity.setRegdate(user.getRegdate());
+        repo.save(entity);
+        map.put("RESULT","회원가입성공");
+        return map;
+
+    }
+
+    @PutMapping("/update")
+    public HashMap<String,String> update(@RequestBody User user){
+        // System.out.println(user);
+        HashMap<String,String> map = new HashMap<>();
+        User entity = repo.findByEmail(user.getEmail());
+        entity.setUserName(user.getUserName());
+        entity.setEmail(user.getEmail());
+        entity.setPassword(user.getPassword());
+        repo.save(entity);
+        map.put("result", "SUCCESE");
+        return map;
     }
     
 
