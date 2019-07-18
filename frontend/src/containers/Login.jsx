@@ -11,14 +11,16 @@ import {
     MDBIcon,
     MDBCardHeader,
     MDBBtn,
-    MDBInput
+    MDBInput,
+    MDBNavLink
   } from "mdbreact";
+import Navbar from '../components/Navbar';
 class Login extends Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state={
             email : '',
-            password : ''
+            password : '',
         }
         this.Login = this.Login.bind(this)
         this.emailChange = this.emailChange.bind(this)
@@ -45,7 +47,8 @@ class Login extends Component{
 
         .then(res=> {
             if (res.data) {
-              console.dir(res.data)
+              localStorage.setItem('uno',JSON.stringify(res.data.uno))
+              
             } else {
                 alert('아이디나 비밀번호가 틀렸습니다.')
             }
@@ -58,7 +61,7 @@ class Login extends Component{
 
     render(){
         return(
-            <MDBContainer>
+            <MDBContainer className="py-5">
             <MDBRow center>
               <MDBCol md="6">
                 <MDBCard>
@@ -89,7 +92,7 @@ class Login extends Component{
                           validate
                         />
                       </div>
-      
+                    
                     <div className="text-center mt-4">
                       <MDBBtn
                         color="light-blue"
@@ -102,7 +105,7 @@ class Login extends Component{
                     </form>
                     <MDBModalFooter>
                       <div className="font-weight-light">
-                        <p>Not a member? Sign Up</p>
+                        <MDBNavLink to="/join"><p>Not a member? Sign Up</p></MDBNavLink>
                         <p>Forgot Password?</p>
                       </div>
                     </MDBModalFooter>
