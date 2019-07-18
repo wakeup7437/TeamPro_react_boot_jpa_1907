@@ -28,11 +28,19 @@ public class BoardController {
     @Autowired
     BoardRepository repo;
 
-    @GetMapping("")
-    @Transactional(readOnly = true)
-    public Page<Board> getBoardPage(@RequestParam String param) {
-        Pageable page = PageRequest.of(0, 10,Sort.Direction.DESC,"bno");
 
+    @GetMapping("")
+    public String test(){
+        System.out.println("test==========================");
+        return "testtttt";
+    }
+
+    //@RequestParam int param
+    @GetMapping("/all")
+    //@Transactional(readOnly = true)
+    public Page<Board> getBoardPage() {
+        System.out.println("getpage================================================");
+        Pageable page = PageRequest.of(0, 10,Sort.Direction.DESC,"bno");
         return repo.findAll(page);
     }
     

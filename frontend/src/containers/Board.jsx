@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import SideNav from '../components/SideNav'
 import {MDBDataTable,MDBContainer,MDBCol,MDBRow,MDBTableHead,MDBTableBody,MDBTable,MDBCard} from 'mdbreact'
+import axios from 'axios'
 
 class Board extends Component{
     constructor(){
@@ -8,7 +9,16 @@ class Board extends Component{
 
     }
     componentDidMount(){
-
+      let url = "http://localhost:8080"
+      let param={page:"3"}
+      axios.get(url+'/board/all')
+      .then((d)=>{
+        alert("success")
+        console.log(d)
+      })
+      .catch((e)=>{
+        console.log("fail--"+e)
+      })
     }
 
     render(){
