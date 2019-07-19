@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, useCallback } from 'react'
 import axios from 'axios';
+import App from '../containers/App'
+import ReactDOM from 'react-dom';
 
 import {
     MDBContainer,
@@ -19,8 +21,9 @@ class Login extends Component{
     constructor(props){
         super(props)
         this.state={
-            email : '',
+            email : props.check1,
             password : '',
+
         }
         this.Login = this.Login.bind(this)
         this.emailChange = this.emailChange.bind(this)
@@ -36,7 +39,9 @@ class Login extends Component{
         this.setState({password: e.target.value})
     }
 
+
     Login(e){
+      console.log(this.props.check1)
         e.preventDefault();
         let data={
             email : this.state.email,
@@ -47,7 +52,13 @@ class Login extends Component{
 
         .then(res=> {
             if (res.data) {
-              localStorage.setItem('uno',JSON.stringify(res.data.uno))
+              sessionStorage.setItem('uno',JSON.stringify(res.data.uno))
+              sessionStorage.setItem('userName',JSON.stringify(res.data.userName))
+              sessionStorage.setItem('email',JSON.stringify(res.data.email))
+              // this.props.history.push("/")
+              // window.location.reload()
+              // ReactDOM.render(<App/>, document.getElementById('root'),this.props.history.push("/"));
+              
               
             } else {
                 alert('아이디나 비밀번호가 틀렸습니다.')
@@ -82,6 +93,7 @@ class Login extends Component{
                            error="wrong"
                            success="right"
                            onChange={this.emailChange}
+                           value={this.state.email}
                         />
                         <MDBInput
                           label="Type your password"

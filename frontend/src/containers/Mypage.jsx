@@ -6,7 +6,7 @@ class Mypage extends Component{
     constructor(){
         super()
         this.state={
-          userName : '',
+          userName : '123',
           email : '',
           password : '',
           pCheck : ''
@@ -62,6 +62,7 @@ class Mypage extends Component{
                     error="wrong"
                     success="right"
                     onChange={this.emailUpdate}
+                    
                   />
                   <MDBInput
                     label="Your name"
@@ -71,6 +72,7 @@ class Mypage extends Component{
                     error="wrong"
                     success="right"
                     onChange={this.userNameUpdate}
+                    value={this.state.userName}
                   />
                   <MDBInput
                     label="Your password"
