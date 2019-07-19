@@ -5,44 +5,13 @@ MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBBtn ,MDBBtnGroup  } from
 import Board from '../containers/Board'
 import Jumbotron from './Jumbotron'
 import "./Navbar.css"
+import App from "../containers/App"
+import ReactDOM from 'react-dom';
 import Join from "../containers/Join.jsx";
 import Mypage from "../containers/Mypage.jsx";
 import Login from "../containers/Login.jsx"
 
- 
 
-class Navbar extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      isOpen: false,
-      login: false,
-      check: localStorage.getItem('uno'),
-
-    };
-  }
-
-toggleCollapse = () => {
-  this.setState({ isOpen: !this.state.isOpen });
-}
-
-
-  /* componentWillMount = () => {
-    if (localStorage.getItem('uno')) {
-      this.setState({
-        login:true
-      }) 
-    } else{
-        this.setState({
-          login:false
-      }) 
-    }
-  } */
-
-
-
-render() {
-  console.log('hi')
 const bstyle={
   padding:"13.44px 25px"
 }
@@ -50,7 +19,42 @@ const astyle={
   padding:0,
 }
 
-  return (
+
+class Navbar extends Component {
+  constructor(props){
+    super(props)
+
+    console.log("-----------")
+    console.log(props)
+
+    this.state = {
+      isOpen: false,
+      login: 'aa1212a',
+      check: sessionStorage.getItem('uno'),
+      
+
+    };
+
+    props.change();
+  }
+
+toggleCollapse = () => {
+  this.setState({ isOpen: !this.state.isOpen });
+}
+
+login=()=>{
+    this.setState({
+      login: '12412122',
+    })
+}
+
+render(){
+
+  const {current,change} = this.props;
+
+ 
+
+   return(
     <Router >
     <div style={{height : 120 }}></div>
     <MDBNavbar color="#0091ea light-blue accent-4 fixed-top" dark expand="md">
@@ -73,7 +77,7 @@ const astyle={
             <MDBNavLink to="#!">랭킹</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
-            <MDBNavLink to="/board">게시판</MDBNavLink>
+            <MDBNavLink to="/board">{current}</MDBNavLink>
           </MDBNavItem>
         </MDBNavbarNav>
         <MDBNavbarNav right>
@@ -86,7 +90,7 @@ const astyle={
               <MDBDropdownToggle caret color="yellow"/>
               <MDBDropdownMenu >
                 <MDBDropdownItem >
-                <MDBNavLink to="/mypage" color="yellow">로그아웃</MDBNavLink>
+                <MDBNavLink to="/" onClick={this.reRender}>로그아웃</MDBNavLink>
                 </MDBDropdownItem>
                 <MDBDropdownItem>
                 <MDBNavLink to="/mypage">마이페이지</MDBNavLink>
@@ -97,7 +101,6 @@ const astyle={
           : 
           <MDBBtnGroup>
             <MDBBtn  color="blue" style={astyle}>
-           {localStorage.clear()}
             <MDBNavLink to="/login" style={bstyle}>로그인</MDBNavLink>
             </MDBBtn>
           </MDBBtnGroup>} 
@@ -106,13 +109,14 @@ const astyle={
       </MDBCollapse>
     </MDBNavbar>
     <Route path="/" exact component={Jumbotron}/>
-    <Route path="/login" component={Login} />
+    <Route path="/login" component={()=><Login check1={this.login} check2={this.state.login}/>}  />
     <Route path="/join" component={Join}/>
     <Route path="/board" component={Board}/>
     <Route path="/mypage" component={Mypage}/>
     </Router>
-    );
-  }
+   )
 }
+}
+
 
 export default Navbar;
