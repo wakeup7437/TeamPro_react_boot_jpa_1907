@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, hashHistory } from "react-router-dom";
+import { BrowserRouter as Router, Route, } from "react-router-dom";
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
 MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBBtn ,MDBBtnGroup  } from "mdbreact";
 import Board from '../containers/Board'
@@ -8,6 +8,8 @@ import "./Navbar.css"
 import Join from "../containers/Join.jsx";
 import Mypage from "../containers/Mypage.jsx";
 import Login from "../containers/Login.jsx"
+import passChange from "../containers/passChange"
+import DelUser from '../containers/DelUser'
 
  
 
@@ -22,12 +24,11 @@ class Navbar extends Component {
 
     };
   }
-isLogin=()=>{
+isLogin=(props)=>{
   sessionStorage.getItem('uno')
   this.setState({
     check : true
   })
-  
 }
 passwordCheck(e){
   this.setState({pCheck: e.target.value})
@@ -82,7 +83,7 @@ const astyle={
             {this.state.check ? 
           <MDBBtnGroup>   
             <MDBBtn  color="blue" style={astyle}>
-            <MDBNavLink to="/Mypage" style={bstyle}>마이페이지</MDBNavLink>
+            <MDBNavLink to="/Mypage" style={bstyle}>{JSON.parse(sessionStorage.getItem('userName'))} 님</MDBNavLink>
             </MDBBtn>
             <MDBDropdown >
               <MDBDropdownToggle caret color="yellow"/>
@@ -92,6 +93,12 @@ const astyle={
                 </MDBDropdownItem>
                 <MDBDropdownItem>
                 <MDBNavLink to="/mypage">마이페이지</MDBNavLink>
+                </MDBDropdownItem>
+                <MDBDropdownItem>
+                <MDBNavLink to="/passChange">비밀번호 변경</MDBNavLink>
+                </MDBDropdownItem>
+                <MDBDropdownItem>
+                <MDBNavLink to="/delUser">회원 탈퇴</MDBNavLink>
                 </MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
@@ -107,13 +114,15 @@ const astyle={
       </MDBCollapse>
     </MDBNavbar>
     <Route path="/" exact component={Jumbotron}/>
-    <Route path="/login" component={()=><Login loginCheck={this.isLogin}/>} />
+    <Route path="/login" component={(props)=><Login {...props} loginCheck={this.isLogin}/>}/>
     <Route path="/join" component={Join}/>
     <Route path="/board" component={Board}/>
+    <Route path="/passChange" component={passChange}/>
     <Route path="/mypage" component={()=> <Mypage delCheck={this.isLogout}/>}/>
+    <Route path="/delUser" component={(props)=><DelUser {...props} logoutCheck={this.isLogout}/>}/>
     </Router>
     );
   }
 }
 
-export default Navbar;
+export default  Navbar;

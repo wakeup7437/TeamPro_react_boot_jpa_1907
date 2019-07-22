@@ -54,15 +54,16 @@ public class UserController {
     }
 
     @PutMapping("/update")
-    public HashMap<String,String> update(@RequestBody User user){
-        System.out.println(user.getUno());
-        HashMap<String,String> map = new HashMap<>();
+    public String update(@RequestBody User user){
         User entity = repo.findById(user.getUno()).get();
-        entity.setUserName(user.getUserName());
-        entity.setPassword(user.getPassword());
-        repo.save(entity);
-        map.put("result", "SUCCESE");
-        return map;
+        if(entity.getPassword().equals(user.getPassword()))
+        {
+            entity.setPassword(user.getPassword());
+            repo.save(entity);
+            return "Update";
+        }else{
+            return "Fail";
+        }
     }
 
     @DeleteMapping("/delete/{uno}")

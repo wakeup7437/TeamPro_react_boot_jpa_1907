@@ -45,7 +45,8 @@ class Join extends Component{
           axios.post('http://localhost:8080/users/join', data)
           .then(res=>{
             if(res.data){
-              alert('가입성공')
+              alert('회원가입성공')
+              this.props.history.push('/')
             }else{
               alert('가입 실패 중복된 이메일입니다.')
             }

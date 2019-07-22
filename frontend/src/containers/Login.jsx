@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-
 import {
     MDBContainer,
     MDBRow,
@@ -36,7 +35,9 @@ class Login extends Component{
     }
 
     Login(e){
-      // this.props.history.push("/");
+      console.log(this.props)
+      console.log(this.props.islogin)
+      // this.props.history.push('/')
 
         e.preventDefault();
         let data={
@@ -51,9 +52,10 @@ class Login extends Component{
               sessionStorage.setItem('uno',JSON.stringify(res.data.uno))
               sessionStorage.setItem('email',JSON.stringify(res.data.email))
               sessionStorage.setItem('userName',JSON.stringify(res.data.userName))
+              sessionStorage.setItem('regdate',JSON.stringify(res.data.regdate))
               // sessionStorage.getItem('uno')
               this.props.loginCheck()
-              
+              this.props.history.push('/')
             } else {
                 alert('아이디나 비밀번호가 틀렸습니다.')
             }
@@ -73,7 +75,7 @@ class Login extends Component{
                   <MDBCardBody>
                     <MDBCardHeader className="form-header deep-blue-gradient rounded">
                       <h3 className="my-3">
-                        <MDBIcon icon="lock" /> Login:
+                        <MDBIcon icon="lock" /> 로그인
                       </h3>
                     </MDBCardHeader>
                     <form>
@@ -110,7 +112,7 @@ class Login extends Component{
                     </form>
                     <MDBModalFooter>
                       <div className="font-weight-light">
-                        <MDBNavLink to="/join"><p>Not a member? Sign Up</p></MDBNavLink>
+                        <MDBNavLink to="/join"><p>회원가입하기</p></MDBNavLink>
                         <p>Forgot Password?</p>
                       </div>
                     </MDBModalFooter>

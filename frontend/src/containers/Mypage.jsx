@@ -1,76 +1,18 @@
 import React, { Component } from 'react'
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody } from 'mdbreact';
-import Axios from 'axios';
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, } from 'mdbreact';
 
 class Mypage extends Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state={
           userName : JSON.parse(sessionStorage.getItem('userName')) ,
           email : JSON.parse(sessionStorage.getItem('email')),
-          password : '',
-          pCheck : ''
+          regdate : JSON.parse(sessionStorage.getItem('regdate')),
         }
-        this.passwordUpdate = this.passwordUpdate.bind(this)
         this.userNameUpdate = this.userNameUpdate.bind(this)
-        this.Update = this.Update.bind(this)
-        this.passwordCheck = this.passwordCheck.bind(this)
-        this.delete = this.delete.bind(this)
-        this.deleteCheck = this.deleteCheck.bind(this)
-    }
-    passwordUpdate(e){
-      this.setState({password: e.target.value})
     }
     userNameUpdate(e){
       this.setState({userName: e.target.value})
-    }
-    passwordCheck(e){
-      this.setState({pCheck: e.target.value})
-    }
-
-    deleteCheck(e){
-      e.preventDefault();
-      if(window.confirm("정말 삭제 하시겠습니까??") == true){
-        this.delete(e)
-        alert('삭제성공')
-      }else{
-        return
-      }
-    }
-
-    delete(e){
-      e.preventDefault();
-      
-
-      Axios.delete(`http://localhost:8080/users/delete/${JSON.parse(sessionStorage.getItem('uno'))}`)
-      .then(res=>{
-        alert('삭제성공')
-        this.props.delCheck()
-      })
-      .catch(e=>{
-        alert('에러')
-      })
-
-    }
-
-    Update(e){
-      e.preventDefault();
-      let data={
-        uno : JSON.parse(sessionStorage.getItem('uno')),
-        userName : this.state.userName,
-        password : this.state.password
-      }
-      if(this.state.password === this.state.pCheck && this.state.password != '' && this.state.userName !=''){
-          Axios.put('http://localhost:8080/users/update',data)
-          .then(res=>{
-            alert('업데이트 성공')
-          })
-          .catch(e=>{
-            alert('실패')
-          })
-      }else{
-        alert('변경할 내용중 공백이 있거나 같지 않습니다')
-      }
     }
     
     render(){
@@ -84,9 +26,10 @@ class Mypage extends Component{
                 <p className="h4 text-center py-4">Account Information</p>
                 <div className="grey-text">
                   <MDBInput
-                    label="Your email"
+                    label="이메일"
                     group
                     type="email"
+                    icon="null"
                     validate
                     error="wrong"
                     success="right"
@@ -95,9 +38,10 @@ class Mypage extends Component{
 
                   />
                   <MDBInput
-                    label="Your name"
+                    label="닉네임"
                     group
                     type="text"
+                    icon="null"
                     validate
                     error="wrong"
                     success="right"
@@ -105,30 +49,23 @@ class Mypage extends Component{
                     value={this.state.userName}
                   />
                   <MDBInput
-                    label="Your password"
-                    group
-                    type="password"
-                    validate
-                    onChange={this.passwordUpdate}
-                  />
-                  <MDBInput
-                    label="Confirm your password"
+                    label="가입일"
                     group
                     type="text"
+                    icon="null"
                     validate
-                    onChange={this.passwordCheck}
+                    value={this.state.regdate.split('T')[0]}
+                    
                   />
                 </div>
                 <div className="text-center py-4 mt-3">
                   <MDBBtn color="cyan"  onClick={this.Update}>
-                    회원 정보 수정
+                    비밀 번호 변경
                   </MDBBtn>
                   <MDBBtn color="red"  onClick={this.deleteCheck}>
                     회원 탈퇴
                   </MDBBtn>
                 </div>
-                
-               
               </form>
             </MDBCardBody>
           </MDBCard>
