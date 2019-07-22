@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,40 +34,41 @@ public class UserController {
         } else {
             return null;
         }
-
     }
 
     @PostMapping(value="join")
     public HashMap<String,String> Join(@RequestBody User user) {
-        // System.out.println("접속");
         HashMap<String,String> map = new HashMap<>();
-        User entity = new User();
-        // System.out.println(user.getUserName());
-        // System.out.println(user.getPassword());
-        // System.out.println(user.getEmail());
-        // System.out.println(user);
-        entity.setEmail(user.getEmail());
-        entity.setPassword(user.getPassword());
-        entity.setUserName(user.getUserName());
-        // entity.setUno(user.getUno());
-        // entity.setRegdate(user.getRegdate());
-        repo.save(entity);
-        map.put("RESULT","회원가입성공");
-        return map;
-
+        Optional<User> result = repo.findByEmail(user.getEmail());
+        if (result.isPresent()){
+            return null;
+        }else{
+            User entity = new User();
+            entity.setEmail(user.getEmail());
+            entity.setPassword(user.getPassword());
+            entity.setUserName(user.getUserName());
+            repo.save(entity);
+            map.put("result","회원가입성공");
+            return map;
+        }
     }
 
     @PutMapping("/update")
     public HashMap<String,String> update(@RequestBody User user){
-        // System.out.println(user);
+        System.out.println(user.getUno());
         HashMap<String,String> map = new HashMap<>();
-        User entity = repo.findByEmail(user.getEmail());
+        User entity = repo.findById(user.getUno()).get();
         entity.setUserName(user.getUserName());
-        entity.setEmail(user.getEmail());
         entity.setPassword(user.getPassword());
         repo.save(entity);
         map.put("result", "SUCCESE");
         return map;
+    }
+
+    @DeleteMapping("/delete/{uno}")
+    public void del(@PathVariable String uno) {
+        System.out.println(uno);
+        repo.deleteById(Long.parseLong(uno));
     }
     
 

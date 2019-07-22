@@ -1,17 +1,50 @@
-import React, { Component, useEffect } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, hashHistory } from "react-router-dom";
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
 MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBBtn ,MDBBtnGroup  } from "mdbreact";
 import Board from '../containers/Board'
 import Jumbotron from './Jumbotron'
 import "./Navbar.css"
-import App from "../containers/App"
-import ReactDOM from 'react-dom';
 import Join from "../containers/Join.jsx";
 import Mypage from "../containers/Mypage.jsx";
 import Login from "../containers/Login.jsx"
 
+ 
 
+class Navbar extends Component {
+  constructor(props){
+    super(props)
+    // this.isLogout = this.isLogout.bind(this)
+    this.state = {
+      isOpen: false,
+      login: false,
+      check: sessionStorage.getItem('uno'),
+
+    };
+  }
+isLogin=()=>{
+  sessionStorage.getItem('uno')
+  this.setState({
+    check : true
+  })
+  
+}
+passwordCheck(e){
+  this.setState({pCheck: e.target.value})
+}
+toggleCollapse = () => {
+  this.setState({ isOpen: !this.state.isOpen });
+}
+
+isLogout=()=>{
+  sessionStorage.clear();
+  this.setState({
+    check : false
+  })
+}
+  
+
+render() {
 const bstyle={
   padding:"13.44px 25px"
 }
@@ -19,42 +52,7 @@ const astyle={
   padding:0,
 }
 
-
-class Navbar extends Component {
-  constructor(props){
-    super(props)
-
-    console.log("-----------")
-    console.log(props)
-
-    this.state = {
-      isOpen: false,
-      login: 'aa1212a',
-      check: sessionStorage.getItem('uno'),
-      
-
-    };
-
-    props.change();
-  }
-
-toggleCollapse = () => {
-  this.setState({ isOpen: !this.state.isOpen });
-}
-
-login=()=>{
-    this.setState({
-      login: '12412122',
-    })
-}
-
-render(){
-
-  const {current,change} = this.props;
-
- 
-
-   return(
+  return (
     <Router >
     <div style={{height : 120 }}></div>
     <MDBNavbar color="#0091ea light-blue accent-4 fixed-top" dark expand="md">
@@ -77,7 +75,7 @@ render(){
             <MDBNavLink to="#!">랭킹</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
-            <MDBNavLink to="/board">{current}</MDBNavLink>
+            <MDBNavLink to="/board">게시판</MDBNavLink>
           </MDBNavItem>
         </MDBNavbarNav>
         <MDBNavbarNav right>
@@ -90,7 +88,7 @@ render(){
               <MDBDropdownToggle caret color="yellow"/>
               <MDBDropdownMenu >
                 <MDBDropdownItem >
-                <MDBNavLink to="/" onClick={this.reRender}>로그아웃</MDBNavLink>
+                <MDBNavLink to="/" onClick={this.isLogout}>로그아웃</MDBNavLink>
                 </MDBDropdownItem>
                 <MDBDropdownItem>
                 <MDBNavLink to="/mypage">마이페이지</MDBNavLink>
@@ -109,14 +107,13 @@ render(){
       </MDBCollapse>
     </MDBNavbar>
     <Route path="/" exact component={Jumbotron}/>
-    <Route path="/login" component={()=><Login check1={this.login} check2={this.state.login}/>}  />
+    <Route path="/login" component={()=><Login loginCheck={this.isLogin}/>} />
     <Route path="/join" component={Join}/>
     <Route path="/board" component={Board}/>
-    <Route path="/mypage" component={Mypage}/>
+    <Route path="/mypage" component={()=> <Mypage delCheck={this.isLogout}/>}/>
     </Router>
-   )
+    );
+  }
 }
-}
-
 
 export default Navbar;

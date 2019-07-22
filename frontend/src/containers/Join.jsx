@@ -44,9 +44,11 @@ class Join extends Component{
       if(this.state.password === this.state.pCheck && this.state.email && this.state.userName && this.state.password) {
           axios.post('http://localhost:8080/users/join', data)
           .then(res=>{
-            alert(res.data.RESULT)
-
-
+            if(res.data){
+              alert('가입성공')
+            }else{
+              alert('가입 실패 중복된 이메일입니다.')
+            }
           })
           .catch(e=>{
               alert('이미 사용중인 메일입니다!')

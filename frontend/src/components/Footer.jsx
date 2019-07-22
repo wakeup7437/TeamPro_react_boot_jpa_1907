@@ -1,10 +1,7 @@
 import React from "react";
 import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 
-const Footer = (props) => {
-
-  console.log("footer props", props)
-
+const Footer = () => {
   return (
     <MDBFooter color="light-blue accent-4" className="font-small pt-4 mt-4">
       <MDBContainer fluid className="text-center text-md-left">
@@ -17,7 +14,7 @@ const Footer = (props) => {
             </p>
           </MDBCol>
           <MDBCol md="4">
-            <h5 className="title">{props.current}</h5>
+            <h5 className="title">Teams</h5>
             <ul>
               <li className="list-unstyled">
                 <a href="#!">Ki-sang Yoo</a>

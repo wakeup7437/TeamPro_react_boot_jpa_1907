@@ -20,9 +20,7 @@ class SideNav extends React.Component {
                     <MDBBtn onClick={this.handleToggle}><MDBIcon icon="bars" size="3x" /></MDBBtn>
                 </MDBRow>
                 <MDBPageNav>
-                  <input value></input>
-                  <input></input>
-                  <input></input>
+                  
 
                 </MDBPageNav>
             </MDBContainer>
