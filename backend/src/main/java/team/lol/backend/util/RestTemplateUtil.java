@@ -17,7 +17,7 @@ public class RestTemplateUtil {
 
 
     private static final String API_URL="https://kr.api.riotgames.com";
-    private static final String API_KEY="?api_key=RGAPI-43f98699-2fbf-4fbe-a48b-71a42430074c";
+    private static final String API_KEY="?api_key=RGAPI-9add24e5-1644-48ed-8370-5b3d78789f0f";
     private static final String HEADER_PARAM="X-Riot-Token";
 
     //싱글턴
@@ -28,9 +28,9 @@ public class RestTemplateUtil {
     }
 
     @Transactional
-    public Map<String,String> get2way(String nick){
+    public Map<String,Object> get2way(String nick){
         Map<String,String> map =getInfoByNickName(nick);
-        Map<String,String> map2=getUserInfoByAccountId(map.get("accountId"));
+        Map<String,Object> map2=getUserInfoByAccountId(map.get("accountId"));
         return map2;
     }
     public String get2wayInfo(String nick){
@@ -38,31 +38,37 @@ public class RestTemplateUtil {
         return getUserLeagueBySummonerId(map.get("id"));
     }
 
-    //닉네임으로 기본데이터 가져오기
+    
+    //1.닉네임으로 기본데이터 가져오기
     private Map<String,String> getInfoByNickName(String nick){
         String url=API_URL+"/lol/summoner/v4/summoners/by-name/"+nick+API_KEY;
         System.out.println("uri1===="+url);
         return rt.getForObject(url,Map.class);
     }
-    
-    //acountId로 최근 전적 가져오기
-    private Map<String,String> getUserInfoByAccountId(String accountId){
-        String url=API_URL+"/lol/match/v4/matchlists/by-account/"+accountId+API_KEY;
-        System.out.println("uri2===="+url);
-        return rt.getForObject(url,Map.class);
-    }
-    //summonerid로 리그기본정보 얻기(id)
+    //2-1summonerid로 리그기본정보 얻기(id)
     private String getUserLeagueBySummonerId(String id){
         String url=API_URL+"/lol/league/v4/entries/by-summoner/"+id+API_KEY;
         //HttpHeaders header= new HttpHeaders();
         //header.set(HEADER_PARAM,"RGAPI-43f98699-2fbf-4fbe-a48b-71a42430074c");
         return rt.getForObject(url, String.class);
     }
-
-    //championData
-    public String getChampData(String champ){
-        String url="";
-        
-        return null;
+    //2-2acountId로 최근 전적 가져오기
+    private Map<String,Object> getUserInfoByAccountId(String accountId){
+        String url=API_URL+"/lol/match/v4/matchlists/by-account/"+accountId+API_KEY;
+        System.out.println("uri2===="+url);
+        return rt.getForObject(url,Map.class);
     }
+    //3gameId로 경기디테일 가져오기
+    public String getGameDetailByGameId(String gameId){
+        String url=API_URL+"/lol/match/v4/matches/"+gameId+API_KEY;
+        return rt.getForObject(url,String.class);
+    }
+    
+
+    //로테이션 영웅
+    public String getRotation(){
+        String url=API_URL+"/lol/platform/v3/champion-rotations";
+        return rt.getForObject(url,String.class);
+    }
+
 }

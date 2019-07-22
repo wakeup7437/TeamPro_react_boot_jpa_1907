@@ -27,25 +27,40 @@ public class LolApiTest {
 
     @Test
     public void jsonRequestTest(){
-        Map<String,String> test=util.get2way("채형국");
-        //List<Map<String,String>> data=test.get("matches")
+        Map<String,Object> test=util.get2way("채형국");
         System.out.println("==========================================");
-        //test.forEach(i->{System.out.println(i.toString());});
-        System.out.println(test.toString());
-        // test.forEach(i->{
-        //     System.out.println(i.toString());
-        // });
-        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        
         for(String key : test.keySet()){
             System.out.println("key: "+key);
         }
         System.out.println("--------------------------------------");
-        //String matches=test.get("matches");
-        //System.out.println(matches);
-        //JsonParser parser=new JsonParser();
-        //JSONArray
+        
+        List<Map<Object,Object>> matches=(List)test.get("matches");
+        int index=0;
+        while(index<10){
+            index++;
+            Map<?,?> list=matches.get(index);
+            System.out.println("val : "+list.toString());
+            matches.get(index).forEach((k,v)->{
+                System.out.println("k : "+k+", v : "+v);
+                
+            });
+            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+            String game=util.getGameDetailByGameId(list.get("gameId").toString());
+            System.out.println(game.toString());
+        }
+        // matches.forEach((i)->{
+ 
+        // });
+        //test.matches[0].gameId
+        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     }
 
+    @Test
+    public void gameDtailTest(){
+        String game=util.getGameDetailByGameId("3672377334");
+        System.out.println(game);
+    }
     @Test
     public void basicInfoTest(){
         String data = util.get2wayInfo("채형국");

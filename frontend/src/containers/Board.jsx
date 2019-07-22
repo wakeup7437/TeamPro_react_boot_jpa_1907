@@ -4,8 +4,8 @@ import {MDBDataTable,MDBContainer,MDBCol,MDBRow,MDBTableHead,MDBTableBody,MDBTab
 import axios from 'axios'
 
 class Board extends Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
 
     }
     componentDidMount(){
@@ -14,13 +14,24 @@ class Board extends Component{
       axios.get(url+'/board/all')
       .then((d)=>{
         alert("success")
-        console.log(d)
+        console.log(d.data)
       })
       .catch((e)=>{
         console.log("fail--"+e)
       })
     }
-
+    del=(e)=>{
+      // e.preventDefault()
+      // console.log('delete')
+      // axios.delete('http://localhost:8080/board/delete/3')
+      // .then((d)=>{
+      //   console.log(d.data)
+      // })
+      // .catch(e=>{
+      //   console.log(e)
+      // })
+      console.log(this.props.history.push('/'))
+    }
     render(){
         const data = {
             columns: [
@@ -77,8 +88,6 @@ class Board extends Component{
                 age: '63',
                 date: '2011/07/25',
                 salary: '$170',
-                /////////////////
-                onClick:"{test}"
               },
               {
                 name: 'Ashton Cox',
@@ -534,16 +543,16 @@ class Board extends Component{
                         striped
                         bordered
                         hover
-                        sorting={false}
                         data={data}
                     >      
-                      <MDBTableHead columns={data.columns} />
-                      <MDBTableBody rows={data.rows}/>
+                      {/* <MDBTableHead columns={data.columns} />
+                      <MDBTableBody rows={data.rows}/> */}
                     </MDBDataTable>
                 
                 </MDBContainer>
                 </MDBCol>
             </MDBRow>
+            <button onClick={this.del}>btn</button>
             </>         
         )
     }
