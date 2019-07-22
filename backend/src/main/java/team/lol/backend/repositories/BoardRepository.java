@@ -11,5 +11,8 @@ import team.lol.backend.entities.Board;
  */
 public interface BoardRepository extends PagingAndSortingRepository<Board,Long>{
 
-    public Page<Board> findByBnoGreaterThanOrderByBnoDesc(Long bno,Pageable page); 
+    //read
+    public Page<Board> findByBnoGreaterThanOrderByBnoDesc(Long bno,Pageable page);
+    //create
+    //update
 }
