@@ -23,7 +23,7 @@ import lombok.ToString;
 @Setter
 @Entity
 @DynamicInsert
-@ToString(exclude = "replies")
+@ToString
 @Table(name = "boards")
 public class Board {
     enum Category{

@@ -30,11 +30,6 @@ public class DemoApplicationTests {
 
 	@Autowired
 	ReplyRepository reply_repo;
-
-	@Test
-	public void contextLoads() {
-		 
-	}
 	
 	@Test
 	public void boardBummyInsert(){
@@ -55,7 +50,7 @@ public class DemoApplicationTests {
 		Random rand=new Random();
 		IntStream.range(0, 100).forEach(i->{
 			Reply r = new Reply();
-			r.setBno(rand.nextInt(100)+101L);
+			r.setBno(rand.nextInt(200)+1L);
 			r.setReply("reply"+i);
 			r.setReplyer("replyer"+i);
 

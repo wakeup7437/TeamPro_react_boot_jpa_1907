@@ -47,10 +47,6 @@ public class LolApiTest {
             String game=util.getGameDetailByGameId(list.get("gameId").toString());
             System.out.println(game.toString());
         }
-        // matches.forEach((i)->{
- 
-        // });
-        //test.matches[0].gameId
         System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     }
 

@@ -12,10 +12,9 @@ class SideNav extends React.Component {
       });
   };
   func(){
-    let body=''
-    for(let i=0;i<10;i++){
-      body+=`<div>${i+1}</div>`
-    }
+    let body=<div>
+    ddddd
+    </div>
     return body
   }
     render() {
@@ -32,11 +31,8 @@ class SideNav extends React.Component {
                   <MDBBtn onClick={this.handleToggle}><MDBIcon icon="bars" size="3x" /></MDBBtn>
               </MDBRow>{isOpen?
               <MDBPageNav>
-              {/* <div class="spinner-border text-info" role="status">
-                  <span class="sr-only">Loading...</span>
-                  </div> */}
                 {items}
-              </MDBPageNav>:<></>}
+              </MDBPageNav>:this.func()}
           </MDBContainer>
       );
     }

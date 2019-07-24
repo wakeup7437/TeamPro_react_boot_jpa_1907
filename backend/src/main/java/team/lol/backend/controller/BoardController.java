@@ -41,12 +41,14 @@ public class BoardController {
     
     @GetMapping("/all")
     @Transactional(readOnly = true)
-    public Page<Board> getBoardPage() {
-        System.out.println("getpage================================================");
+    public Iterable<Board> getBoardPage() {
+        System.out.println("===================getpage=====================================");
         //Pageable page = PageRequest.of(0, 10,Sort.Direction.DESC,"bno");
-        Pageable page = PageRequest.of(0, 10,new Sort(Direction.DESC,"bno"));
-        System.out.println(repo.findAll(page));
-        return repo.findAll(page);
+        //Pageable page = PageRequest.of(0, 10,new Sort(Direction.DESC,"bno"));
+        //System.out.println(repo.findAll(page).getContent());
+        Iterable<Board> list =repo.findAll();
+        System.out.println(list);
+        return list;
         //return repo.findAll(page);
     }
     @Transactional
@@ -55,10 +57,12 @@ public class BoardController {
         Optional<Board> board = repo.findById(Long.valueOf(bno));
         if(board.isPresent()){
             System.out.println("======board detail======");
+            
         }
-        Board b= board.get();
-        
-        return b;
+        Board obj= board.get();
+        obj.setReplies(obj.getReplies());
+        System.out.println(obj);      
+        return obj.getReplies();
     }
     //입력
     @PostMapping("/insert")
