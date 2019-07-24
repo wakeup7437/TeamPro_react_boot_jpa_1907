@@ -1,5 +1,7 @@
 package team.lol.backend;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -35,7 +37,7 @@ public class DemoApplicationTests {
 	}
 	
 	@Test
-	public void dummyInsert(){
+	public void boardBummyInsert(){
 		IntStream.range(0, 200).forEach(i->{
 			Board b=new Board();
 			b.setTitle("title"+i);
@@ -48,14 +50,12 @@ public class DemoApplicationTests {
 	}
 
 	@Test
-	public void replyInsert(){
+	public void replyDummyInsert(){
 		
 		Random rand=new Random();
 		IntStream.range(0, 100).forEach(i->{
-			Board b = new Board();
-			b.setBno(rand.nextInt(100)+1L);
 			Reply r = new Reply();
-			r.setBoards(b);
+			r.setBno(rand.nextInt(100)+101L);
 			r.setReply("reply"+i);
 			r.setReplyer("replyer"+i);
 
@@ -65,13 +65,42 @@ public class DemoApplicationTests {
 
 	@Transactional
 	@Test
-	public void getBoard(){
+	public void getBoardPage(){
 		Pageable page = PageRequest.of(10,20,Sort.Direction.DESC,"bno");
+		System.out.println("====================test start======================");
 		Page<Board> p=board_repo.findAll(page);
+		System.out.println(p.getContent());
 		p.forEach(u->{
-			System.out.println("--------------------------------------");
+			System.out.println("----------------t----------------------");
 			System.out.println(u.toString()+"||");
 		});
+		System.out.println("====================test end======================");
 	}
 
+	@Transactional
+	@Test
+	public void getBoardAll(){
+		Iterable<Board> list=board_repo.findAll();
+		list.forEach(i->{
+			System.out.println("bno: "+i.getBno()+", title : "+i.getTitle()+", replies : "+i.getReplies().size());
+		});
+		System.out.println("=====test end=====");
+	}
+	@Transactional
+	@Test
+	public void findOneBoard(){
+		System.out.println("=======test ====");
+		Optional<Board> b=board_repo.findById(174L);
+		System.out.println(b.get());
+		List<Reply> list= b.get().getReplies();
+
+		System.out.println("list: "+list.size());
+		
+	}
+	@Test
+	public void findOneReply(){
+		System.out.println("=====test start=====");
+		Optional<Reply> r=reply_repo.findById(1L);
+		System.out.println(r.get());
+	}
 }

@@ -47,7 +47,8 @@ public class Board {
 
     @CreationTimestamp private Timestamp regdate;
 
-    @OneToMany(mappedBy = "boards", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="bno")
     private List<Reply> replies;
     
 }

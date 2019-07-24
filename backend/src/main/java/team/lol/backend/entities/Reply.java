@@ -31,6 +31,6 @@ public class Reply {
     @CreationTimestamp
     private Timestamp replydate;
 
-    @ManyToOne
-    private Board boards;
+    
+    private Long bno;
 }
