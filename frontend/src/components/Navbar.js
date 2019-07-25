@@ -6,7 +6,7 @@ import Board from '../containers/Board'
 import Jumbotron from './Jumbotron'
 import "./Navbar.css"
 import Join from "../containers/Join.jsx";
-import Mypage from "../containers/Mypage.jsx";
+import Mypage from "../containers/Mypage.js";
 import Login from "../containers/Login.jsx"
 import passChange from "../containers/passChange"
 import DelUser from '../containers/DelUser'
@@ -118,7 +118,7 @@ const astyle={
     <Route path="/join" component={Join}/>
     <Route path="/board" component={Board}/>
     <Route path="/passChange" component={passChange}/>
-    <Route path="/mypage" component={()=> <Mypage delCheck={this.isLogout}/>}/>
+    <Route path="/mypage" component={(props)=><Mypage {...props} loginCheck={this.isLogin}/>}/>
     <Route path="/delUser" component={(props)=><DelUser {...props} logoutCheck={this.isLogout}/>}/>
     </Router>
     );

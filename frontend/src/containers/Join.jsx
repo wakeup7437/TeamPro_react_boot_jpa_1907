@@ -34,6 +34,12 @@ class Join extends Component{
       this.setState({pCheck: e.target.value})
     }
 
+    validate(){
+      var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+      if (regExp.test(this.state.email)) return true;
+      else return false;
+    }
+
     Join(e){
       e.preventDefault();
       let data={
@@ -41,7 +47,7 @@ class Join extends Component{
           userName : this.state.userName,
           password : this.state.password
       }
-      if(this.state.password === this.state.pCheck && this.state.email && this.state.userName && this.state.password) {
+      if(this.state.password === this.state.pCheck && this.state.email && this.state.userName && this.state.password && this.validate()) {
           axios.post('http://localhost:8080/users/join', data)
           .then(res=>{
             if(res.data){
@@ -69,10 +75,10 @@ class Join extends Component{
           <MDBCard>
             <MDBCardBody>
               <form>
-                <p className="h4 text-center py-4">Sign up</p>
+                <p className="h4 text-center py-4">회원가입</p>
                 <div className="grey-text">
                   <MDBInput
-                    label="Your name"
+                    label="닉네임"
                     icon="user"
                     group
                     type="text"
@@ -82,7 +88,7 @@ class Join extends Component{
                     onChange={this.nameChange}
                   />
                   <MDBInput
-                    label="Your email"
+                    label="이메일 ex) good123@naver.com"
                     icon="envelope"
                     group
                     type="email"
@@ -92,7 +98,7 @@ class Join extends Component{
                     onChange={this.emailChange}
                   />
                     <MDBInput
-                      label="Your password"
+                      label="패스워드"
                       icon="lock"
                       group
                       type="password"
@@ -100,7 +106,7 @@ class Join extends Component{
                       onChange={this.passwordChange}
                     />
                   <MDBInput
-                    label="Confirm your password"
+                    label="비밀번호 확인"
                     icon="exclamation-triangle"
                     group
                     type="password"

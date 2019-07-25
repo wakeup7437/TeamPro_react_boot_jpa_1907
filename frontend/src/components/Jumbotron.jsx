@@ -7,7 +7,7 @@ const JumbotronPage = () => {
     }
 
   return (
-    <MDBContainer className="mt-5 text-center" style={style}>
+    
       <MDBRow>
         <MDBCol>
           <MDBJumbotron className="p-0">
@@ -26,7 +26,6 @@ const JumbotronPage = () => {
               </MDBBtn>
             </MDBCardBody>
 
-            <MDBContainer>
       <MDBCarousel
         activeItem={1}
         length={3}
@@ -39,7 +38,7 @@ const JumbotronPage = () => {
             <MDBView>
               <img
                 className="d-block w-100"
-                src="https://mdbootstrap.com/img/Photos/Slides/img%20(130).jpg"
+                src="http://optimal.inven.co.kr/upload/2016/02/10/bbs/i10883115114.jpg"
                 alt="First slide"
               />
             </MDBView>
@@ -48,7 +47,7 @@ const JumbotronPage = () => {
             <MDBView>
               <img
                 className="d-block w-100"
-                src="https://mdbootstrap.com/img/Photos/Slides/img%20(129).jpg"
+                src="http://optimal.inven.co.kr/upload/2016/02/10/bbs/i12225589992.jpg"
                 alt="Second slide"
               />
             </MDBView>
@@ -57,18 +56,16 @@ const JumbotronPage = () => {
             <MDBView>
               <img
                 className="d-block w-100"
-                src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg"
+                src="http://optimal.inven.co.kr/upload/2016/02/10/bbs/i12320450432.jpg"
                 alt="Third slide"
               />
             </MDBView>
           </MDBCarouselItem>
         </MDBCarouselInner>
       </MDBCarousel>
-    </MDBContainer>
           </MDBJumbotron>
         </MDBCol>
       </MDBRow>
-    </MDBContainer>
   )
 }
 
