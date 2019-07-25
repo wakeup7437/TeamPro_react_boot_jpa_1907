@@ -70,7 +70,7 @@ class Board extends Component{
           e.replies=e.replies.length
           e.regdate=e.regdate.split('T')[0]
           delete e.content
-          e.detail=<MDBBtn color="dark-green" size="sm" onClick={this.btnClick(e.bno)}>Detail</MDBBtn>
+          e.detail=<MDBBtn color="dark-green" size="sm" onClick={()=>this.btnClick(e.bno)}>Detail</MDBBtn>
         })
         this.cAndr.rows=d.data
         console.log("setState()")
@@ -86,6 +86,7 @@ class Board extends Component{
     }
     btnClick=(e)=>{
       //const p=this.props.history.push('/')
+      console.log('clickkkk:'+e)
       function infunc(){
         console.log('click:'+e)
         //console.log(p)
