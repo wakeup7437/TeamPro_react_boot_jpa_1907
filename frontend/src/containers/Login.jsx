@@ -11,7 +11,10 @@ import {
     MDBCardHeader,
     MDBBtn,
     MDBInput,
-    MDBNavLink
+    MDBNavLink,
+    MDBModal,
+    MDBModalBody,
+    MDBModalHeader,
   } from "mdbreact";
 class Login extends Component{
     constructor(props){
@@ -19,11 +22,19 @@ class Login extends Component{
         this.state={
             email : '',
             password : '',
+            modal: false
         }
         this.Login = this.Login.bind(this)
         this.emailChange = this.emailChange.bind(this)
         this.pwChange = this.pwChange.bind(this)
+        this.passFind = this.passFind.bind(this)
         
+    }
+
+    toggle = () => {
+      this.setState({
+        modal: !this.state.modal
+      });
     }
 
     emailChange(e){
@@ -35,10 +46,6 @@ class Login extends Component{
     }
 
     Login(e){
-      console.log(this.props)
-      console.log(this.props.islogin)
-      // this.props.history.push('/')
-
         e.preventDefault();
         let data={
             email : this.state.email,
@@ -57,7 +64,29 @@ class Login extends Component{
               this.props.loginCheck()
               this.props.history.push('/')
             } else {
-                alert('아이디나 비밀번호가 틀렸습니다.')
+                alert('아이디나 비밀번호가 다르거나 존재하지않습니다.')
+            }
+        })
+        .catch(e=>{
+            alert('axios연동실패')
+        })
+        
+    }
+
+    passFind(e){
+        e.preventDefault();
+        let data={
+            email : this.state.email,
+            password : this.state.password
+        }
+
+        axios.post('http://localhost:8080/users/email', data)
+        .then(res=> {
+            if (res.data) {
+                console.dir(res.data)
+                alert('이메일에 비밀번호가 발송되었습니다.')
+            } else {
+                alert('이메일이나 비밀번호가 다르거나 존재하지않습니다.')
             }
         })
         .catch(e=>{
@@ -81,7 +110,7 @@ class Login extends Component{
                     <form>
                       <div className="grey-text">
                         <MDBInput
-                           label="Your email"
+                           label="이메일"
                            icon="envelope"
                            group
                            type="email"
@@ -91,7 +120,7 @@ class Login extends Component{
                            onChange={this.emailChange}
                         />
                         <MDBInput
-                          label="Type your password"
+                          label="비밀번호"
                           icon="lock"
                           group
                           type="password"
@@ -112,8 +141,44 @@ class Login extends Component{
                     </form>
                     <MDBModalFooter>
                       <div className="font-weight-light">
-                        <MDBNavLink to="/join"><p>회원가입하기</p></MDBNavLink>
-                        <p>Forgot Password?</p>
+                         <MDBNavLink to="/join"><p> GC.kr에 처음이세요? 회원가입하기</p></MDBNavLink>
+                         <MDBNavLink><p onClick={this.toggle}>비밀번호를 잊으셨나요?</p></MDBNavLink>
+
+                          <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
+                            <MDBModalHeader toggle={this.toggle}>비밀번호 찾기
+                            </MDBModalHeader>
+                            <MDBModalBody>
+                            <div className="grey-text py-4" >
+
+                              <p>비밀번호를 찾고자 하는 GC.KR 이메일 ID를 입력해주시면 <br/>
+                                 해당 메일 주소로 비밀번호 재설정 링크를 보내드립니다.</p><br/>
+                                  <MDBInput
+                                    label="이메일"
+                                    icon="envelope"
+                                    group
+                                    type="email"
+                                    validate
+                                    error="wrong"
+                                    success="right"
+                                    onChange={this.emailChange}
+                                  />
+                                  <MDBInput
+                                    label="비밀번호"
+                                    icon="lock"
+                                    group
+                                    type="password"
+                                    onChange={this.pwChange}
+                                    validate
+                                  />
+                                </div>
+                            </MDBModalBody>
+                            
+                            <MDBModalFooter>
+                              <MDBBtn color="secondary" onClick={this.toggle}>취소</MDBBtn>
+                              <MDBBtn color="primary" onClick={this.passFind}>확인</MDBBtn>
+                            </MDBModalFooter>
+                          </MDBModal>
+
                       </div>
                     </MDBModalFooter>
                   </MDBCardBody>
