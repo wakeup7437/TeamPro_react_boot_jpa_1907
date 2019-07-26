@@ -18,7 +18,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-@Table(name = "replies")
+@Table(name = "replies",indexes = {@Index(unique = false,columnList = "bno")})
 @EqualsAndHashCode(of = "rno")
 public class Reply {
 

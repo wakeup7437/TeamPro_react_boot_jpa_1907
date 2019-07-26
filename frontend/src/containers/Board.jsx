@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import SideNav from '../components/SideNav'
-import {MDBDataTable,MDBContainer,MDBCol,MDBRow,MDBCard,MDBBtn} from 'mdbreact'
+import {MDBDataTable,MDBContainer,MDBCol,MDBRow,MDBCard,MDBBtn,MDBBadge} from 'mdbreact'
 import axios from 'axios'
 import BoardDetail from './BoardDetail';
 
@@ -67,9 +67,10 @@ class Board extends Component{
       .then((d)=>{
         console.dir(d.data)
         d.data.forEach(e => {
-          e.replies=e.replies.length
+          e.replies=<MDBBadge color="primary" pill>{e.replies.length}</MDBBadge>
           e.regdate=e.regdate.split('T')[0]
           delete e.content
+          
           e.detail=<MDBBtn color="dark-green" size="sm" onClick={()=>this.btnClick(e.bno)}>Detail</MDBBtn>
         })
         this.cAndr.rows=d.data
@@ -85,17 +86,7 @@ class Board extends Component{
       console.log(this.cAndr)
     }
     btnClick=(e)=>{
-      //const p=this.props.history.push('/')
-      console.log('clickkkk:'+e)
-      function infunc(){
-        console.log('click:'+e)
-        //console.log(p)
-      }
-      return infunc
-    }
-    testFunc=()=>{
-      console.log('test func')
-      this.props.history.push('/detail/1')
+      this.props.history.push('detail/'+e)
     }
     render(){
         const data=(this.state.loaded?this.cAndr:'')
@@ -122,7 +113,6 @@ class Board extends Component{
                 </div>
                 }
               </MDBContainer>
-              <button onClick={this.testFunc}>btn</button>
           </MDBRow>     
         )
     }

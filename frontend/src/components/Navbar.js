@@ -10,6 +10,7 @@ import Mypage from "../containers/Mypage.js";
 import Login from "../containers/Login.jsx"
 import passChange from "../containers/passChange"
 import DelUser from '../containers/DelUser'
+import BoardDetail from "../containers/BoardDetail";
 
  
 
@@ -120,6 +121,7 @@ const astyle={
     <Route path="/passChange" component={passChange}/>
     <Route path="/mypage" component={(props)=><Mypage {...props} loginCheck={this.isLogin}/>}/>
     <Route path="/delUser" component={(props)=><DelUser {...props} logoutCheck={this.isLogout}/>}/>
+    <Route path="/detail/:bno" component={BoardDetail}/>
     </Router>
     );
   }

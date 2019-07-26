@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import team.lol.backend.entities.Board;
+import team.lol.backend.entities.Reply;
 import team.lol.backend.repositories.BoardRepository;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class BoardController {
 
     
     @GetMapping("/all")
-    @Transactional(readOnly = true)
+    @Transactional
     public Iterable<Board> getBoardPage() {
         System.out.println("===================getpage=====================================");
         //Pageable page = PageRequest.of(0, 10,Sort.Direction.DESC,"bno");
@@ -56,13 +57,13 @@ public class BoardController {
     public Object getDetail(@PathVariable String bno){
         Optional<Board> board = repo.findById(Long.valueOf(bno));
         if(board.isPresent()){
-            System.out.println("======board detail======");
-            
-        }
+            System.out.println("======board detail======"); 
+        }     
         Board obj= board.get();
-        obj.setReplies(obj.getReplies());
-        System.out.println(obj);      
-        return obj.getReplies();
+        List<Reply> list=obj.getReplies();
+        System.out.println(list);
+        //obj.setReplies(list);
+        return obj;
     }
     //입력
     @PostMapping("/insert")
@@ -86,7 +87,7 @@ public class BoardController {
         //int result = 
         //repo.deleteByBno(Long.valueOf(bno));
         //System.out.println("delete: "+result);
-        repo.deleteById(4L);
+        repo.deleteById(Long.valueOf(bno));
         return false;
     }
 }
