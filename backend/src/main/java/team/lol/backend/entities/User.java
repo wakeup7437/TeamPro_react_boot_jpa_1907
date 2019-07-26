@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Getter;
@@ -23,6 +24,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @DynamicInsert
+@DynamicUpdate
 @Table(name="users")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;

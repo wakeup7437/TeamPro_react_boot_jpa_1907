@@ -29,6 +29,7 @@ class Mypage extends Component{
         uno : JSON.parse(sessionStorage.getItem('uno')),
         userName : this.state.userName
       }
+      if(this.state.userName != ''){
         Axios.put('http://localhost:8080/users/name',data)
         .then(res=>{
             if(res.data){
@@ -44,6 +45,9 @@ class Mypage extends Component{
         .catch(e=>{
         alert('실패')
         })
+      }else{
+        alert('변경할 닉네임을 입력하세요')
+      }
     }
     render(){
         return(
@@ -66,7 +70,7 @@ class Mypage extends Component{
                     value={this.state.email}
                   />
                   <MDBInput
-                    label="닉네임"
+                    label="닉네임 (변경 하려면 클릭)"
                     group
                     type="text"
                     icon="null"

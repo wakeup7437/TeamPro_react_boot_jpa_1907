@@ -12,7 +12,6 @@ import passChange from "../containers/passChange"
 import DelUser from '../containers/DelUser'
 import BoardDetail from "../containers/BoardDetail";
 
- 
 
 class Navbar extends Component {
   constructor(props){
@@ -117,6 +116,7 @@ const astyle={
     <Route path="/" exact component={Jumbotron}/>
     <Route path="/login" component={(props)=><Login {...props} loginCheck={this.isLogin}/>}/>
     <Route path="/join" component={Join}/>
+    <Route path="/passReset" component={PassReset}/>
     <Route path="/board" component={Board}/>
     <Route path="/passChange" component={passChange}/>
     <Route path="/mypage" component={(props)=><Mypage {...props} loginCheck={this.isLogin}/>}/>

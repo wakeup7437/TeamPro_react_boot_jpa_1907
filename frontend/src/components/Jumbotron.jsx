@@ -7,7 +7,6 @@ const JumbotronPage = () => {
     }
 
   return (
-    
       <MDBRow>
         <MDBCol>
           <MDBJumbotron className="p-0">

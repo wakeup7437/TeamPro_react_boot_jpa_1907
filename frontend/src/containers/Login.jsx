@@ -77,14 +77,14 @@ class Login extends Component{
         e.preventDefault();
         let data={
             email : this.state.email,
-            password : this.state.password
         }
 
         axios.post('http://localhost:8080/users/email', data)
         .then(res=> {
             if (res.data) {
-                console.dir(res.data)
-                alert('이메일에 비밀번호가 발송되었습니다.')
+                alert('이메일에 임시비밀번호가 발송되었습니다.')
+                this.toggle()
+                this.state.userName=''
             } else {
                 alert('이메일이나 비밀번호가 다르거나 존재하지않습니다.')
             }
@@ -149,9 +149,8 @@ class Login extends Component{
                             </MDBModalHeader>
                             <MDBModalBody>
                             <div className="grey-text py-4" >
-
                               <p>비밀번호를 찾고자 하는 GC.KR 이메일 ID를 입력해주시면 <br/>
-                                 해당 메일 주소로 비밀번호 재설정 링크를 보내드립니다.</p><br/>
+                                 해당 메일 주소로 임시 비밀번호를 보내드립니다.</p><br/>
                                   <MDBInput
                                     label="이메일"
                                     icon="envelope"
@@ -161,14 +160,6 @@ class Login extends Component{
                                     error="wrong"
                                     success="right"
                                     onChange={this.emailChange}
-                                  />
-                                  <MDBInput
-                                    label="비밀번호"
-                                    icon="lock"
-                                    group
-                                    type="password"
-                                    onChange={this.pwChange}
-                                    validate
                                   />
                                 </div>
                             </MDBModalBody>
