@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.lol.backend.entities.User;
 import team.lol.backend.repositories.UserRepository;
+import java.util.UUID;
+
+//이메일 관련
+import team.lol.backend.util.EmailSendUtill;
 
 @CrossOrigin(origins = "http://localhost:3000",maxAge = 3600)
 @RestController
@@ -54,6 +58,26 @@ public class UserController {
     }
     
 
+    
+    @DeleteMapping("/delete/{uno}")
+    public void del(@PathVariable String uno) {
+        System.out.println(uno);
+        repo.deleteById(Long.parseLong(uno));
+    }
+    
+    @PostMapping("/login")
+    public Optional<User> Login(@RequestBody User user) {
+        Optional<User> result = repo.findByEmailAndPassword(user.getEmail(),user.getPassword());
+        System.out.println(user);
+        // System.out.println(result.get().getPassword());
+        // System.out.println(result);
+        if (result.isPresent()) {
+            return result;
+        } else {
+            return null;
+        }
+    }
+    
     @PutMapping("/name")
     public User nameUpdate(@RequestBody User user){
         User entity = repo.findById(user.getUno()).get(); // 클라이언트 정보
@@ -68,37 +92,22 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/delete/{uno}")
-    public void del(@PathVariable String uno) {
-        System.out.println(uno);
-        repo.deleteById(Long.parseLong(uno));
-    }
-
-    @PostMapping("/login")
-    public Optional<User> Login(@RequestBody User user) {
-        Optional<User> result = repo.findByEmailAndPassword(user.getEmail(),user.getPassword());
-        System.out.println(user);
-        // System.out.println(result.get().getPassword());
-        // System.out.println(result);
-
-        if (result.isPresent()) {
-            return result;
-        } else {
-            return null;
-        }
-    }
-
     @PostMapping("/email")
     public Optional<User> passFind(@RequestBody User user) {
-        Optional<User> result = repo.findByEmailAndPassword(user.getEmail(),user.getPassword());
-        System.out.println(user + "안녕");
-
+        Optional<User> result = repo.findByEmail(user.getEmail());
         if(result.isPresent()){
+            String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+            uuid = uuid.substring(0,8);
+            result.get().setPassword(uuid);
+            repo.save(result.get());
+            EmailSendUtill email = new EmailSendUtill();
+            email.send(user.getEmail(),uuid);
             return result;
         }else{
             return null;
         }
     }
+
     
     
 
