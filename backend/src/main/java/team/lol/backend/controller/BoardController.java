@@ -7,16 +7,11 @@ import team.lol.backend.entities.Board;
 import team.lol.backend.entities.Reply;
 import team.lol.backend.repositories.BoardRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -67,17 +62,20 @@ public class BoardController {
     }
     //입력
     @PostMapping("/insert")
-    public Boolean insert(){
-        
-        return false;
+    public Board insert(@RequestBody Board board){
+        System.out.println("=====insert=====");
+        System.out.println(board);
+        Board result=repo.save(board);
+        return result;
     }
     //수정
     @PutMapping(value="/update/{id}")
-    public Boolean update(@PathVariable String id, @RequestBody List<?> entity) {
-        
+    public Boolean update(@PathVariable String id, @RequestBody Board board) {
+        repo.save(board);
         return false;
     }
     //삭제
+    @Transactional
     @DeleteMapping("/delete/{bno}")
     public Boolean delete(@PathVariable String bno){
         
@@ -87,7 +85,12 @@ public class BoardController {
         //int result = 
         //repo.deleteByBno(Long.valueOf(bno));
         //System.out.println("delete: "+result);
-        repo.deleteById(Long.valueOf(bno));
-        return false;
+        try {
+            repo.deleteById(Long.valueOf(bno));
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 }
