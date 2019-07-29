@@ -3,6 +3,8 @@ package team.lol.backend.util;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -15,12 +17,16 @@ public class RestTemplateUtil {
     private static final String API_KEY="?api_key=RGAPI-b1f6b9b1-7049-4ffa-9706-cb2344a2a6c9";
     private static final String HEADER_PARAM="X-Riot-Token";
 
-    //싱글턴
-    private static RestTemplate rt;
-    @Autowired
-    public RestTemplateUtil(RestTemplate restTemplate){
-        this.rt=restTemplate;
+    @Bean
+    public RestTemplate restTemplate(RestTemplateBuilder builder){
+        return builder.build();
     }
+    @Autowired
+    private RestTemplate rt;
+    
+    // public RestTemplateUtil(RestTemplate restTemplate){
+    //     this.rt=restTemplate;
+    // }
     
     @Transactional
     public Map<String,Object> get2way(String nick){

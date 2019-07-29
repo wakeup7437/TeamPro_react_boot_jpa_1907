@@ -66,7 +66,7 @@ class Board extends Component{
       })
       .catch((e)=>{
         console.log("fail--"+e)
-        alert("")
+        alert(e)
       })
     }
     btnClick=(e)=>{
