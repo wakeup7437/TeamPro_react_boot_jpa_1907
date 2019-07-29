@@ -53,52 +53,36 @@ class Board extends Component{
           sort: 'asc'
         }],
         rows:[]
-      
-      
       }
     }
     
     componentWillMount(){
-      
-      console.log("mount start")
-      console.dir(this.cAndr)
       let url = "http://localhost:8080"
       axios.get(url+'/board/all')
       .then((d)=>{
-        console.dir(d.data)
         d.data.forEach(e => {
           e.replies=<MDBBadge color="primary" pill>{e.replies.length}</MDBBadge>
           e.regdate=e.regdate.split('T')[0]
           delete e.content
-          
           e.detail=<MDBBtn color="dark-green" size="sm" onClick={()=>this.btnClick(e.bno)}>Detail</MDBBtn>
         })
         this.cAndr.rows=d.data
-        console.log("setState()")
         this.setState({loaded:true})
-        console.log(this.state)
-        
       })
       .catch((e)=>{
         console.log("fail--"+e)
+        alert("")
       })
-      console.log('mountend')
-      console.log(this.cAndr)
     }
     btnClick=(e)=>{
       this.props.history.push('detail/'+e)
     }
     render(){
         const data=(this.state.loaded?this.cAndr:'')
-        console.log('render() data=='+data)
-        console.dir(data)
-        console.log(this.state)
-        console.log("props..")
-        console.log(this.props.history)
         return(
           <MDBRow>
               <MDBContainer className="white col-md-10">
-                <MDBCard>Boards</MDBCard>
+                <MDBCard className="py-4">Boards</MDBCard>
                 {this.state.loaded?
                 <MDBDataTable 
                   responsive
