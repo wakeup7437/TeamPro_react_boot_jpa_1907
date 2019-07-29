@@ -11,11 +11,16 @@ import Login from "../containers/Login.jsx"
 import passChange from "../containers/passChange"
 import DelUser from '../containers/DelUser'
 import BoardDetail from "../containers/BoardDetail";
+import {login,logout} from '../actions'
+import {connect} from 'react-redux'
+import BoardModify from "../containers/BoardModify";
+import BoardWrite from "../containers/BoardWrite";
 
 
 class Navbar extends Component {
   constructor(props){
     super(props)
+    console.log(props)
     // this.isLogout = this.isLogout.bind(this)
     this.state = {
       isOpen: false,
@@ -24,11 +29,19 @@ class Navbar extends Component {
 
     };
   }
+
+//로그인 검사 x  로그인 프로세스 o loginProc같은 이름으로 더 명확하게
 isLogin=(props)=>{
   sessionStorage.getItem('uno')
   this.setState({
     check : true
   })
+  console.dir(this.props)
+  
+  this.props.dispatch(login({
+    userName:sessionStorage.getItem('userName'),
+    uno:sessionStorage.getItem('uno')
+  }))
 }
 passwordCheck(e){
   this.setState({pCheck: e.target.value})
@@ -42,6 +55,7 @@ isLogout=()=>{
   this.setState({
     check : false
   })
+  this.props.dispatch(logout())
 }
   
 
@@ -121,9 +135,11 @@ const astyle={
     <Route path="/mypage" component={(props)=><Mypage {...props} loginCheck={this.isLogin}/>}/>
     <Route path="/delUser" component={(props)=><DelUser {...props} logoutCheck={this.isLogout}/>}/>
     <Route path="/detail/:bno" component={BoardDetail}/>
+    <Route path="/modify/:bno" component={BoardModify}/>
+    <Route path="/write" component={BoardWrite}/>
     </Router>
     );
   }
 }
 
-export default  Navbar;
+export default connect()(Navbar)

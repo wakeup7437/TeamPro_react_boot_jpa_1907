@@ -3,6 +3,7 @@ import SideNav from '../components/SideNav'
 import {MDBDataTable,MDBContainer,MDBCol,MDBRow,MDBCard,MDBBtn,MDBBadge} from 'mdbreact'
 import axios from 'axios'
 import BoardDetail from './BoardDetail';
+import {connect} from 'react-redux'
 
 class Board extends Component{
     constructor(props){
@@ -57,6 +58,9 @@ class Board extends Component{
     }
     
     componentWillMount(){
+      console.log(this.props.login)  
+      console.log("mount start")
+      console.dir(this.cAndr)
       let url = "http://localhost:8080"
       axios.get(url+'/board/all')
       .then((d)=>{
@@ -77,12 +81,21 @@ class Board extends Component{
     btnClick=(e)=>{
       this.props.history.push('detail/'+e)
     }
+    write=()=>{
+      console.dir(this.props)
+      this.props.history.push('/write')
+    }
     render(){
         const data=(this.state.loaded?this.cAndr:'')
         return(
           <MDBRow>
               <MDBContainer className="white col-md-10">
-                <MDBCard className="py-4">Boards</MDBCard>
+                <MDBCard>
+                  <MDBRow className="p-4 d-flex justify-content-between">
+                      <h2 className="">Boards</h2>
+                    <MDBBtn onClick={this.write}>글쓰기</MDBBtn>
+                  </MDBRow>
+                </MDBCard>
                 {this.state.loaded?
                 <MDBDataTable 
                   responsive
@@ -101,4 +114,7 @@ class Board extends Component{
         )
     }
 }
-export default Board;
+const mapStateToProps = (state) =>{
+  return state.login
+}
+export default connect(mapStateToProps)(Board)

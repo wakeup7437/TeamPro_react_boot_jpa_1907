@@ -28,12 +28,18 @@ import lombok.ToString;
 @ToString
 @Table(name = "boards")
 public class Board {
-    enum Category{
-        FREE, //1
-        CATE2,
-        CATE3,
-        CATE4,
-        CATE5; //5
+    @Getter
+    public enum Category{
+        FREE("자유"), //0
+        CATE1("카테1"),
+        CATE2("카테2"),
+        CATE3("카테3"),
+        CATE4("카테4"),
+        CATE5("카테5"); //5
+        private String cate;
+        private Category(String s){
+            this.cate=s;
+        }
     }
 
     private static final long serialVersionUID = 1L;
@@ -42,8 +48,8 @@ public class Board {
     private Long bno;
     @Column(name="writer",nullable = false) private String writer;
     @Column(name="title",nullable = false) private String title;
-    //@Enumerated(EnumType.ORDINAL) 
-    @Column(name="category",nullable = false) private int category;
+    @Enumerated(EnumType.ORDINAL) 
+    @Column(name="category",nullable = false) private Category category;
     @Column(name="content",nullable = false) private String content;
     @Column(name="recommend") @ColumnDefault("0") String recommend;
 

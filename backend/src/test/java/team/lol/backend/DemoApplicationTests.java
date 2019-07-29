@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+import javax.persistence.EnumType;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import team.lol.backend.entities.Board;
 import team.lol.backend.entities.Reply;
+import team.lol.backend.entities.Board.Category;
 import team.lol.backend.repositories.BoardRepository;
 import team.lol.backend.repositories.ReplyRepository;
 
@@ -36,12 +39,18 @@ public class DemoApplicationTests {
 		IntStream.range(0, 200).forEach(i->{
 			Board b=new Board();
 			b.setTitle("title"+i);
-			b.setCategory(i%5+1);
+			Category cate=EnumType.valueOf(Category.class,"1");
+			//b.setCategory(cate);//i%5+1);
 			b.setWriter("writer"+i);
 			b.setContent("content..."+i);
 
 			board_repo.save(b);
 		});
+	}
+
+	@Test
+	public void enumTest(){
+		System.out.println(Category.values());
 	}
 
 	@Test
