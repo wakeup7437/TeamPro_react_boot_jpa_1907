@@ -1,6 +1,9 @@
 import React from "react";
 import "../assets/css/Jumbotron.css"
 import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol, MDBCardBody,MDBCarousel,  MDBCarouselInner, MDBCarouselItem, MDBView,  } from "mdbreact";
+import First from "../assets/images/First.jpg"
+import Two from "../assets/images/Two.jpg"
+import Three from "../assets/images/Three.jpg"
 const JumbotronPage = () => {
     const style ={
         background : ''
@@ -37,7 +40,7 @@ const JumbotronPage = () => {
             <MDBView>
               <img
                 className="d-block w-100"
-                src="http://optimal.inven.co.kr/upload/2016/02/10/bbs/i10883115114.jpg"
+                src={First}
                 alt="First slide"
               />
             </MDBView>
@@ -46,7 +49,7 @@ const JumbotronPage = () => {
             <MDBView>
               <img
                 className="d-block w-100"
-                src="http://optimal.inven.co.kr/upload/2016/02/10/bbs/i12225589992.jpg"
+                src={Two}
                 alt="Second slide"
               />
             </MDBView>
@@ -55,7 +58,7 @@ const JumbotronPage = () => {
             <MDBView>
               <img
                 className="d-block w-100"
-                src="http://optimal.inven.co.kr/upload/2016/02/10/bbs/i12320450432.jpg"
+                src={Three}
                 alt="Third slide"
               />
             </MDBView>

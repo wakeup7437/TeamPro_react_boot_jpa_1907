@@ -15,6 +15,7 @@ import {login,logout} from '../actions'
 import {connect} from 'react-redux'
 import BoardModify from "../containers/BoardModify";
 import BoardWrite from "../containers/BoardWrite";
+import Statistics from "../containers/Statistics"
 
 
 class Navbar extends Component {
@@ -84,7 +85,7 @@ const astyle={
             <MDBNavLink to="#!">챔피언 분석</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
-            <MDBNavLink to="#!">통계</MDBNavLink>
+            <MDBNavLink to="/statistics">통계</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
             <MDBNavLink to="#!">랭킹</MDBNavLink>
@@ -136,6 +137,7 @@ const astyle={
     <Route path="/delUser" component={(props)=><DelUser {...props} logoutCheck={this.isLogout}/>}/>
     <Route path="/detail/:bno" component={BoardDetail}/>
     <Route path="/modify/:bno" component={BoardModify}/>
+    <Route path="/statistics" component={Statistics}/>
     <Route path="/write" component={BoardWrite}/>
     </Router>
     );
