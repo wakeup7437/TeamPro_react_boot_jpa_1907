@@ -13,9 +13,11 @@ class BoardWrite extends Component{
     }
 
     save=()=>{
+        console.log(this.state)
         axios.post('http://localhost:8080/board/insert',this.state)
         .then((d)=>{
             alert("sucess: "+d.data)
+            this.props.history.push('/')
         })
         .catch(e=>{
             alert(e)

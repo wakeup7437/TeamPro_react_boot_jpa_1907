@@ -56,10 +56,10 @@ class Login extends Component{
 
         .then(res=> {
             if (res.data) {
-              sessionStorage.setItem('uno',JSON.stringify(res.data.uno))
-              sessionStorage.setItem('email',JSON.stringify(res.data.email))
-              sessionStorage.setItem('userName',JSON.stringify(res.data.userName))
-              sessionStorage.setItem('regdate',JSON.stringify(res.data.regdate))
+              sessionStorage.setItem('uno',res.data.uno)
+              sessionStorage.setItem('email',res.data.email)
+              sessionStorage.setItem('userName',res.data.userName)
+              sessionStorage.setItem('regdate',res.data.regdate)
               // sessionStorage.getItem('uno')
               this.props.loginCheck()
               this.props.history.push('/')

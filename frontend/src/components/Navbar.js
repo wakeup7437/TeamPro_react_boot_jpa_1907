@@ -97,7 +97,7 @@ const astyle={
             {this.state.check ? 
           <MDBBtnGroup>   
             <MDBBtn  color="blue" style={astyle}>
-            <MDBNavLink to="/Mypage" style={bstyle}>{JSON.parse(sessionStorage.getItem('userName'))} 님</MDBNavLink>
+            <MDBNavLink to="/Mypage" style={bstyle}>{sessionStorage.getItem('userName')} 님</MDBNavLink>
             </MDBBtn>
             <MDBDropdown >
               <MDBDropdownToggle caret color="yellow"/>

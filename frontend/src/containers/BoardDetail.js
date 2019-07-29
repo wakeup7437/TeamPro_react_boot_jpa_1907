@@ -8,7 +8,8 @@ const BoardDetail=(props)=>{
     const {bno}=props.match.params
     const [data,setData]=useState({})
     const [list,setList]=useState([])
-
+    const {userinfo} = props
+    const {writer} =userinfo
     useEffect(()=>{
     let url = "http://localhost:8080/board/detail/"+bno
     axios.get(url)
@@ -19,7 +20,14 @@ const BoardDetail=(props)=>{
         const x=d.data.replies.map(
         (v,i)=>
             <MDBListGroupItem key={i}>
-                {v.rno} | {v.replyer} | {v.reply} | {v.replydate}
+                <MDBRow className="d-flex justify-content-between">
+                    <div>{v.replyer}</div>
+                    <div>{v.replydate}</div>
+                </MDBRow>
+                <MDBRow className="d-flex">
+                <h5>{v.reply}</h5>
+                </MDBRow>
+                
             </MDBListGroupItem>)
         setList(x)
         
@@ -28,13 +36,10 @@ const BoardDetail=(props)=>{
         alert("data not found")
         props.history.push('/')
     })
-    .then(()=>{
-        
-        
-    })
     },[])
 
     const btnDel=()=>{
+        console.dir(props.userinfo)
         let flag=window.confirm('Are You Sure?')
         if(flag){
             window.alert('yes')
@@ -66,42 +71,36 @@ const BoardDetail=(props)=>{
                     <h2>{data.title}</h2>
                 </div>
                 <MDBRow>
-                    <MDBCol size="6">rno {data.bno}|cate:{data.category}</MDBCol>
+                    <MDBCol size="6">rno {data.bno}</MDBCol>
                     <MDBCol size="6">regdate {data.regdate}</MDBCol>
+                </MDBRow>
+                <MDBRow>
+                    <MDBCol size="6">cate:{data.category}</MDBCol>
+                    <MDBCol size="6">writer: {data.writer}</MDBCol>
                 </MDBRow>
             </MDBCardHeader>
         <MDBCardBody className="">
             {data.content}
         </MDBCardBody>
         <MDBCardFooter>
+            {writer?<div>
             <MDBBtn color="primary" onClick={btnModifyOn} >Modify</MDBBtn>
             <MDBBtn color="danger" onClick={btnDel} >Delete</MDBBtn>
+            </div>:''}
         </MDBCardFooter>
         
         </MDBCard>
         <br/>
         <MDBListGroup>
-            <MDBCardHeader className="d-block p-3 text-left bg-white">
-                <div><h3>Replies </h3>total {list.length}</div>
+            <MDBCardHeader className="p-3 text-left bg-white">
+                <MDBRow><h3>Replies </h3> <label className="p-2">total{list.length}</label> </MDBRow>
             </MDBCardHeader>
             {list}
         </MDBListGroup>
-        {/* <MDBModal isOpen={modal} toggle={()=>setModal(false)} size="lg">
-            <MDBModalHeader>MDBModal title</MDBModalHeader>
-            <MDBModalBody>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.
-            </MDBModalBody>
-            <MDBModalFooter>
-                <MDBBtn color="secondary" onClick={()=>setModal(false)}>Close</MDBBtn>
-                <MDBBtn color="primary"onClick={saveModify}>Save changes</MDBBtn>
-            </MDBModalFooter>
-        </MDBModal>
-         */}
-        
     </MDBContainer>
     )
 }
-
-export default connect()(BoardDetail)
+const mapStateToProps = (state) =>{
+    return state.login
+  }
+export default connect(mapStateToProps)(BoardDetail)

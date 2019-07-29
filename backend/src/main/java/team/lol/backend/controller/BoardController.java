@@ -9,9 +9,13 @@ import team.lol.backend.repositories.BoardRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,13 +43,10 @@ public class BoardController {
     @Transactional
     public Iterable<Board> getBoardPage() {
         System.out.println("===================getpage=====================================");
-        //Pageable page = PageRequest.of(0, 10,Sort.Direction.DESC,"bno");
-        //Pageable page = PageRequest.of(0, 10,new Sort(Direction.DESC,"bno"));
-        //System.out.println(repo.findAll(page).getContent());
-        Iterable<Board> list =repo.findAll();
-        System.out.println(list);
-        return list;
-        //return repo.findAll(page);
+        Pageable page = PageRequest.of(0, 200,new Sort(Direction.DESC,"bno"));
+        Page<Board> list =repo.findAll(page);
+        System.out.println(list.getContent());
+        return list.getContent();
     }
     @Transactional
     @GetMapping("/detail/{bno}")

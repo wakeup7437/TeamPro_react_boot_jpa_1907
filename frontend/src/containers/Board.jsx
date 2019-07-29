@@ -17,50 +17,41 @@ class Board extends Component{
         {
           label: 'Writer',
           field: 'writer',
-          sort: 'asc',
           width: 270
         },
         {
           label: 'Title',
           field: 'title',
-          sort: 'asc',
           width: 200
         },
         {
           label: 'Category',
           field: 'category',
-          sort: 'asc'
         },
         {
           label: 'Recommend',
           field: 'recommend',
-          sort: 'asc'
         },
         {
           label: 'Regdate',
           field: 'regdate',
-          sort: 'asc',
+          sort: 'desc',
           width: 100
         },
         {
           label: 'Reply',
           field: 'replies',
-          sort: 'asc',
           width: 150
         },
         {
           lable: 'Details',
           field: 'details',
-          sort: 'asc'
         }],
         rows:[]
       }
     }
     
-    componentWillMount(){
-      console.log(this.props.login)  
-      console.log("mount start")
-      console.dir(this.cAndr)
+    componentDidMount(){
       let url = "http://localhost:8080"
       axios.get(url+'/board/all')
       .then((d)=>{
@@ -93,7 +84,7 @@ class Board extends Component{
                 <MDBCard>
                   <MDBRow className="p-4 d-flex justify-content-between">
                       <h2 className="">Boards</h2>
-                    <MDBBtn onClick={this.write}>글쓰기</MDBBtn>
+                    {this.props.login?<MDBBtn onClick={this.write}>글쓰기</MDBBtn>:''}
                   </MDBRow>
                 </MDBCard>
                 {this.state.loaded?

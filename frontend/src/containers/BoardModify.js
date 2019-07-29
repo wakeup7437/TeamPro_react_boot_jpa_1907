@@ -8,7 +8,8 @@ class BoardModify extends Component{
     
     handleChange=(e)=>{
         const data={[e.target.id]:e.target.value}
-        this.props.dispath(boardModify(data))
+        this.props.dispatch(boardModify(data))
+        console.dir(this.props)
     }
 
     cancel=()=>{
@@ -16,6 +17,8 @@ class BoardModify extends Component{
     }
     save=()=>{
         console.log('save')
+        console.log(this.props.previnfo)
+        axios.put('http://localhost:3000/modify')
     }
     render(){
     const {bno}=this.props.match.params
@@ -29,19 +32,19 @@ class BoardModify extends Component{
             <MDBCardHeader className="text-left">
                 <div className="d-block p-2">
                 <h2>게시글 수정</h2>
-                <MDBInput
-                    label="Title"
-                    size="lg"
-                    group
-                    validate
-                    error="wrong"
-                    success="right"
-                    value={previnfo.title}
-                  />
+                
                 </div>
                 
             </MDBCardHeader>
             <MDBCardBody className="">
+            <MDBInput
+                    label="Title"
+                    size="lg"
+                    id="title"
+                    onChange={this.handleChange}
+                    value={previnfo.title}
+
+                  />
             <MDBRow>
                 <MDBCol size="6">
                 <div>
@@ -63,9 +66,11 @@ class BoardModify extends Component{
                 </MDBCol>
             </MDBRow>
                 <MDBInput
-                    label="Title"
+                    label="Content"
                     size="lg"
-                    id="title"
+                    id="content"
+                    type="textarea"
+                    rows="10"
                     className="form-control"
                     onChange={this.handleChange}
                     value={previnfo.content}
@@ -73,8 +78,8 @@ class BoardModify extends Component{
                 
             </MDBCardBody>
             <MDBCardFooter>
-                <MDBBtn color="primary" onClick={this.save} >Submit</MDBBtn>
-                <MDBBtn color="danger" onClick={this.cancel} >cancel</MDBBtn>
+                <MDBBtn color="primary" onClick={this.save} >Modify</MDBBtn>
+                <MDBBtn color="danger" onClick={this.cancel} >Cancel</MDBBtn>
             </MDBCardFooter>
         </MDBCard> 
     </MDBContainer>
