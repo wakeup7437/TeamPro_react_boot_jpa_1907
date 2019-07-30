@@ -8,10 +8,10 @@ class Mypage extends Component{
         this.userNameUpdate = this.userNameUpdate.bind(this)
         this.Update = this.Update.bind(this)
         this.state={
-          valueName : JSON.parse(sessionStorage.getItem('userName')) ,
+          valueName : sessionStorage.getItem('userName') ,
           userName : '',
-          email : JSON.parse(sessionStorage.getItem('email')),
-          regdate : JSON.parse(sessionStorage.getItem('regdate')),
+          email : sessionStorage.getItem('email'),
+          regdate : sessionStorage.getItem('regdate'),
           NameChanger : false
         }
     }
@@ -77,7 +77,7 @@ class Mypage extends Component{
                     validate
                     error="wrong"
                     success="right"
-                    value={JSON.parse(sessionStorage.getItem('userName'))}
+                    value={sessionStorage.getItem('userName')}
                     onClick={this.Changer}
                   />
                   {this.state.NameChanger ?

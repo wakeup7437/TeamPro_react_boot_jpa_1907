@@ -37,5 +37,6 @@ public class User implements Serializable {
     @Column(nullable = false, unique = true) String email;
     @CreationTimestamp private Timestamp regdate;
     @UpdateTimestamp private Timestamp updatedate;
+    private String npass;
     
 }

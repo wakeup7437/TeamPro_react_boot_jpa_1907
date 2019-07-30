@@ -31,7 +31,8 @@ class passChange extends Component{
         e.preventDefault();
         let data={
           uno : JSON.parse(sessionStorage.getItem('uno')),
-          password : this.state.password
+          password : this.state.password,
+          npass : this.state.npass
         }
             if(this.state.npass == this.state.nCheck && this.npass !='' && this.nCheck !=''){
                 Axios.put('http://localhost:8080/users/update',data)
