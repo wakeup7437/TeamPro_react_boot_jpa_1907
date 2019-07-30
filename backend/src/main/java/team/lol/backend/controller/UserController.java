@@ -49,7 +49,7 @@ public class UserController {
         User entity = repo.findById(user.getUno()).get();
         if(entity.getPassword().equals(user.getPassword()))
         {
-            entity.setPassword(user.getPassword());
+            entity.setPassword(user.getNpass());
             repo.save(entity);
             return "Update";
         }else{
@@ -69,8 +69,6 @@ public class UserController {
     public Optional<User> Login(@RequestBody User user) {
         Optional<User> result = repo.findByEmailAndPassword(user.getEmail(),user.getPassword());
         System.out.println(user);
-        // System.out.println(result.get().getPassword());
-        // System.out.println(result);
         if (result.isPresent()) {
             return result;
         } else {
