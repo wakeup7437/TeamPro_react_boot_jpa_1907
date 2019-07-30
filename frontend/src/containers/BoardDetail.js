@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {MDBContainer,MDBCard,MDBCardBody,MDBCardFooter,MDBCardHeader,MDBRow,MDBCol,MDBListGroup,MDBListGroupItem,MDBBtn} from 'mdbreact'
+import {MDBInput,MDBContainer,MDBCard,MDBCardBody,MDBCardFooter,MDBCardHeader,MDBRow,MDBCol,MDBListGroup,MDBListGroupItem,MDBBtn} from 'mdbreact'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {boardModify} from '../actions'
@@ -7,9 +7,10 @@ import {boardModify} from '../actions'
 const BoardDetail=(props)=>{
     const {bno}=props.match.params
     const [data,setData]=useState({})
-    const [list,setList]=useState([])
-    const {userinfo} = props
-    const {writer} =userinfo
+    const [rlist,setList]=useState([])
+    const serverURL='http://localhost:8080'
+    
+    //init
     useEffect(()=>{
     let url = "http://localhost:8080/board/detail/"+bno
     axios.get(url)
@@ -17,28 +18,30 @@ const BoardDetail=(props)=>{
         console.log(d.data)
         d.data.regdate=d.data.regdate.split('T')[0]
         setData(d.data)
-        const x=d.data.replies.map(
+        const list=d.data.replies.map(
         (v,i)=>
             <MDBListGroupItem key={i}>
                 <MDBRow className="d-flex justify-content-between">
                     <div>{v.replyer}</div>
-                    <div>{v.replydate}</div>
+                    <div>{v.replydate.split('T')[0]}</div>
                 </MDBRow>
                 <MDBRow className="d-flex">
-                <h5>{v.reply}</h5>
+                <h6>{v.reply}</h6>
                 </MDBRow>
-                
-            </MDBListGroupItem>)
-        setList(x)
+            </MDBListGroupItem>
+        )
+        setList(list)
+        console.dir(d.data.replies)
         
     })
     .catch(e=>{
         alert("data not found")
         props.history.push('/')
     })
-    },[])
+    },[])//init end
 
     const btnDel=()=>{
+        console.dir(props)
         console.dir(props.userinfo)
         let flag=window.confirm('Are You Sure?')
         if(flag){
@@ -63,6 +66,36 @@ const BoardDetail=(props)=>{
         props.history.push("/modify/"+bno)
         
     }
+    const isMyBoard=()=>{
+        if(props.login){
+            if(props.userinfo.userName==data.writer){
+                return(
+                    <>
+                    <MDBBtn color="primary" onClick={btnModifyOn} >Modify</MDBBtn>
+                    <MDBBtn color="danger" onClick={btnDel} >Delete</MDBBtn>
+                    </>
+                )
+            }
+        }else return ''
+        
+    }
+    let replyInput=null
+    const addReply=()=>{
+        let data={
+            reply:replyInput.state.innerValue,
+            replyer:data.writer,
+            bno:bno
+        }
+        axios.post(serverURL+'/reply/insert',data)
+        .then((r)=>{
+            alert('댓글 추가 성공')
+            props.history.replace('/detail/'+bno)
+        })
+        .catch((e)=>{
+            alert('댓글 추가 실패')
+        })
+    }
+    
     return (
     <MDBContainer>
         <MDBCard>
@@ -71,7 +104,7 @@ const BoardDetail=(props)=>{
                     <h2>{data.title}</h2>
                 </div>
                 <MDBRow>
-                    <MDBCol size="6">rno {data.bno}</MDBCol>
+                    <MDBCol size="6">bno {data.bno}</MDBCol>
                     <MDBCol size="6">regdate {data.regdate}</MDBCol>
                 </MDBRow>
                 <MDBRow>
@@ -83,19 +116,39 @@ const BoardDetail=(props)=>{
             {data.content}
         </MDBCardBody>
         <MDBCardFooter>
-            {writer?<div>
-            <MDBBtn color="primary" onClick={btnModifyOn} >Modify</MDBBtn>
-            <MDBBtn color="danger" onClick={btnDel} >Delete</MDBBtn>
-            </div>:''}
+            {isMyBoard()}
         </MDBCardFooter>
         
         </MDBCard>
         <br/>
         <MDBListGroup>
             <MDBCardHeader className="p-3 text-left bg-white">
-                <MDBRow><h3>Replies </h3> <label className="p-2">total{list.length}</label> </MDBRow>
+                <MDBRow><h3>Replies </h3> <label className="p-2">total{rlist.length}</label> </MDBRow>
+                {props.login?
+                <MDBCard>
+                <MDBRow className="align-items-center" center>
+                    <MDBCol sm="8">
+                        <MDBInput 
+                            hint="Add reply..."
+                            id="add"
+                            ref={ref => {
+                                replyInput = ref;
+                              }}
+                        />
+                    </MDBCol>
+                    <MDBCol sm="3">
+                        <MDBBtn
+                        className=""
+                        outline 
+                        color="primary"
+                        onClick={addReply}
+                        >Add Reply</MDBBtn>
+                    </MDBCol>
+                </MDBRow>
+                </MDBCard>
+                :''}
             </MDBCardHeader>
-            {list}
+            {rlist}
         </MDBListGroup>
     </MDBContainer>
     )
