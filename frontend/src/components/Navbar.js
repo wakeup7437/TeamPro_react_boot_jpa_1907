@@ -16,12 +16,12 @@ import {connect} from 'react-redux'
 import BoardModify from "../containers/BoardModify";
 import BoardWrite from "../containers/BoardWrite";
 import Statistics from "../containers/Statistics"
+import SearchSummoner from './SearchSummoner'
 
 
 class Navbar extends Component {
   constructor(props){
     super(props)
-    console.log(props)
     // this.isLogout = this.isLogout.bind(this)
     this.state = {
       isOpen: false,
@@ -139,6 +139,7 @@ const astyle={
     <Route path="/modify/:bno" component={BoardModify}/>
     <Route path="/statistics" component={Statistics}/>
     <Route path="/write" component={BoardWrite}/>
+    <Route path="/search/:sname" component={SearchSummoner}/>
     </Router>
     );
   }

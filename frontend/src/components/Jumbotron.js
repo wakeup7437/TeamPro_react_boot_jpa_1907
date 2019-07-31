@@ -1,29 +1,36 @@
-import React from "react";
+import React,{Component} from "react";
 import "../assets/css/Jumbotron.css"
 import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol, MDBCardBody,MDBCarousel,  MDBCarouselInner, MDBCarouselItem, MDBView,  } from "mdbreact";
 import First from "../assets/images/First.jpg"
 import Two from "../assets/images/Two.jpg"
 import Three from "../assets/images/Three.jpg"
-const JumbotronPage = () => {
-    const style ={
-        background : ''
-    }
-
+class JumbotronPage extends Component {
+  style ={
+      background : ''
+  }
+  //input=''
+  searchSummoner=(e)=>{
+    console.dir(this.input)
+    console.dir(this.input.value)
+    console.dir(this.props)
+    this.props.history.push('/search/'+this.input.value)
+  }
+  render(){
   return (
       <MDBRow>
         <MDBCol>
           <MDBJumbotron className="p-0">
           
-            <MDBCardBody style={style}>
+            <MDBCardBody style={this.style}>
             <div className="input-group" >
             <div className="input-group-prepend" >
                 <span className="input-group-text" id="basic-addon" >
                    <i className="fa fa-user prefix"></i>
                 </span>
             </div>
-            <input type="text" className="form-control" placeholder="소환사명" aria-label="Username" aria-describedby="basic-addon" />
+            <input type="text" ref={(ref)=>this.input=ref} className="form-control" placeholder="소환사명" aria-label="Username" aria-describedby="basic-addon" />
             </div>
-              <MDBBtn href="#" gradient="purple" rounded>
+              <MDBBtn onClick={this.searchSummoner} gradient="purple" rounded>
                 검색
               </MDBBtn>
             </MDBCardBody>
@@ -69,6 +76,7 @@ const JumbotronPage = () => {
         </MDBCol>
       </MDBRow>
   )
+}
 }
 
 export default JumbotronPage;

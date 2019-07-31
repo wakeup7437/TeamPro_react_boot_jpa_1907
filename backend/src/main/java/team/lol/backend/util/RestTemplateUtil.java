@@ -14,7 +14,7 @@ public class RestTemplateUtil {
 
 
     private static final String API_URL="https://kr.api.riotgames.com";
-    private static final String API_KEY="?api_key=RGAPI-b1f6b9b1-7049-4ffa-9706-cb2344a2a6c9";
+    private static final String API_KEY="?api_key=RGAPI-d2ec31ae-7fb8-4e27-bb62-51ea00d4232b";
     private static final String HEADER_PARAM="X-Riot-Token";
 
     @Bean
@@ -24,9 +24,6 @@ public class RestTemplateUtil {
     @Autowired
     private RestTemplate rt;
     
-    // public RestTemplateUtil(RestTemplate restTemplate){
-    //     this.rt=restTemplate;
-    // }
     
     @Transactional
     public Map<String,Object> get2way(String nick){
@@ -51,6 +48,7 @@ public class RestTemplateUtil {
         String url=API_URL+"/lol/league/v4/entries/by-summoner/"+id+API_KEY;
         //HttpHeaders header= new HttpHeaders();
         //header.set(HEADER_PARAM,"RGAPI-43f98699-2fbf-4fbe-a48b-71a42430074c");
+        
         return rt.getForObject(url, String.class);
     }
     //2-2acountId로 최근 전적 가져오기
