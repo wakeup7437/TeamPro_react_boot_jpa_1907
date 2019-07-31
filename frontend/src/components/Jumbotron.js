@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import "../assets/css/Jumbotron.css"
-import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol, MDBCardBody,MDBCarousel,  MDBCarouselInner, MDBCarouselItem, MDBView,  } from "mdbreact";
+import { MDBJumbotron, MDBBtn, MDBRow, MDBCol, MDBCardBody,MDBCarousel,  MDBCarouselInner, MDBCarouselItem, MDBView,  } from "mdbreact";
 import First from "../assets/images/First.jpg"
 import Two from "../assets/images/Two.jpg"
 import Three from "../assets/images/Three.jpg"

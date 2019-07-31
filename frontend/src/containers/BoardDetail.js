@@ -68,7 +68,7 @@ const BoardDetail=(props)=>{
     }
     const isMyBoard=()=>{
         if(props.login){
-            if(props.userinfo.userName==data.writer){
+            if(props.userinfo.userName===data.writer){
                 return(
                     <>
                     <MDBBtn color="primary" onClick={btnModifyOn} >Modify</MDBBtn>

@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import SideNav from '../components/SideNav'
-import {MDBDataTable,MDBContainer,MDBCol,MDBRow,MDBCard,MDBBtn,MDBBadge} from 'mdbreact'
+import {MDBDataTable,MDBContainer,MDBRow,MDBCard,MDBBtn,MDBBadge} from 'mdbreact'
 import axios from 'axios'
-import BoardDetail from './BoardDetail';
 import {connect} from 'react-redux'
 
 class Board extends Component{

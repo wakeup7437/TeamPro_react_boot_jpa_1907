@@ -1,5 +1,6 @@
 package team.lol.backend;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -18,6 +19,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import team.lol.backend.domain.BoardDto;
 import team.lol.backend.entities.Board;
 import team.lol.backend.entities.Reply;
 import team.lol.backend.entities.Board.Category;
@@ -70,14 +72,26 @@ public class DemoApplicationTests {
 	@Transactional
 	@Test
 	public void getBoardPage(){
-		Pageable page = PageRequest.of(10,20,Sort.Direction.DESC,"bno");
+		Pageable page = PageRequest.of(0,200,Sort.Direction.DESC,"bno");
 		System.out.println("====================test start======================");
 		Page<Board> p=board_repo.findAll(page);
-		System.out.println(p.getContent());
-		p.forEach(u->{
-			System.out.println("----------------t----------------------");
-			System.out.println(u.toString()+"||");
+		//System.out.println(p.getContent());
+		List<Board> list=p.getContent();
+		List<BoardDto> dtos=new ArrayList<>();
+		BoardDto dto=new BoardDto();
+		list.forEach(i->{
+			dto.setBno(i.getBno());
+			dto.setCategory(i.getCategory().toString());
+			dto.setRecommend(i.getRecommend());
+			dto.setRegdate(i.getRegdate());
+			dto.setReplies(i.getReplies().size());
+			dto.setTitle(i.getTitle());
+			dto.setWriter(i.getWriter());
+			dtos.add(dto);
+			System.out.println("===list===");
 		});
+		System.out.println("====dtos====");
+		System.out.println(dtos);
 		System.out.println("====================test end======================");
 	}
 

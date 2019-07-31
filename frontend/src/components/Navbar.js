@@ -22,7 +22,6 @@ import SearchSummoner from './SearchSummoner'
 class Navbar extends Component {
   constructor(props){
     super(props)
-    // this.isLogout = this.isLogout.bind(this)
     this.state = {
       isOpen: false,
       login: false,
@@ -85,7 +84,7 @@ const astyle={
             <MDBNavLink to="#!">챔피언 분석</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
-            <MDBNavLink to="/statistics">통계</MDBNavLink>
+            <MDBNavLink to="/statistics">챔피언 목록</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
             <MDBNavLink to="#!">랭킹</MDBNavLink>
