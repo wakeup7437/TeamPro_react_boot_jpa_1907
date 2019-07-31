@@ -16,13 +16,12 @@ import {connect} from 'react-redux'
 import BoardModify from "../containers/BoardModify";
 import BoardWrite from "../containers/BoardWrite";
 import Statistics from "../containers/Statistics"
+import SearchSummoner from './SearchSummoner'
 
 
 class Navbar extends Component {
   constructor(props){
     super(props)
-    console.log(props)
-    // this.isLogout = this.isLogout.bind(this)
     this.state = {
       isOpen: false,
       login: false,
@@ -85,7 +84,7 @@ const astyle={
             <MDBNavLink to="#!">챔피언 분석</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
-            <MDBNavLink to="/statistics">통계</MDBNavLink>
+            <MDBNavLink to="/statistics">챔피언 목록</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
             <MDBNavLink to="#!">랭킹</MDBNavLink>
@@ -139,6 +138,7 @@ const astyle={
     <Route path="/modify/:bno" component={BoardModify}/>
     <Route path="/statistics" component={Statistics}/>
     <Route path="/write" component={BoardWrite}/>
+    <Route path="/search/:sname" component={SearchSummoner}/>
     </Router>
     );
   }

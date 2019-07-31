@@ -27,7 +27,6 @@ class BoardWrite extends Component{
         this.props.history.push('/')
     }
     handleChange=(e)=>{
-        const id=e.target.id
         this.setState({
             [e.target.id]:e.target.value
         })

@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {MDBContainer,MDBCard,MDBCardBody,MDBCardFooter,MDBCardHeader,MDBInput,MDBRow,MDBCol,MDBListGroup,MDBListGroupItem,MDBBtn,MDBModal,MDBModalHeader,MDBModalBody,MDBModalFooter} from 'mdbreact'
+import {MDBContainer,MDBCard,MDBCardBody,MDBCardFooter,MDBCardHeader,MDBInput,MDBRow,MDBCol,MDBBtn} from 'mdbreact'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {boardModify} from '../actions'
@@ -18,16 +18,16 @@ class BoardModify extends Component{
     save=()=>{
         console.log('save')
         console.log(this.props.previnfo)
-        // axios.put('http://localhost:3000/modify',this.props.board)
-        // .then(()=>{
-        //        this.props.history.replace("/detail/"+this.props.match.params.bno)
-        // })
-        // .catch(()=>{
+        axios.put('http://localhost:3000/modify',this.props.board)
+        .then(()=>{
+               this.props.history.replace("/detail/"+this.props.match.params.bno)
+        })
+        .catch(()=>{
 
-        // })
+        })
     }
     render(){
-    const {bno}=this.props.match.params
+    //const {bno}=this.props.match.params
     const {previnfo}=this.props
     console.log(previnfo)
 
