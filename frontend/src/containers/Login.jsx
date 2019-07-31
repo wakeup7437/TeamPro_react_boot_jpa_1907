@@ -86,7 +86,7 @@ class Login extends Component{
                 this.toggle()
                 this.state.userName=''
             } else {
-                alert('이메일이나 비밀번호가 다르거나 존재하지않습니다.')
+                alert('이메일이 다르거나 존재하지않습니다.')
             }
         })
         .catch(e=>{
@@ -141,8 +141,8 @@ class Login extends Component{
                     </form>
                     <MDBModalFooter>
                       <div className="font-weight-light">
-                         <MDBNavLink to="/join"><p> GC.kr에 처음이세요? 회원가입하기</p></MDBNavLink>
-                         <MDBNavLink><p onClick={this.toggle}>비밀번호를 잊으셨나요?</p></MDBNavLink>
+                         <MDBNavLink to="/join"><p className="btn"> GC.kr에 처음이세요? 회원가입하기</p></MDBNavLink>
+                         <p className="blue-text btn"  onClick={this.toggle}>비밀번호를 잊으셨나요?</p>
 
                           <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
                             <MDBModalHeader toggle={this.toggle}>비밀번호 찾기
@@ -163,7 +163,6 @@ class Login extends Component{
                                   />
                                 </div>
                             </MDBModalBody>
-                            
                             <MDBModalFooter>
                               <MDBBtn color="secondary" onClick={this.toggle}>취소</MDBBtn>
                               <MDBBtn color="primary" onClick={this.passFind}>확인</MDBBtn>
