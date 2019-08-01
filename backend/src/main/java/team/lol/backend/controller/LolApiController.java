@@ -2,7 +2,7 @@ package team.lol.backend.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import team.lol.backend.service.LolApiService;
+import team.lol.backend.util.LolApiService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,12 +18,10 @@ public class LolApiController {
 
     @Autowired
     LolApiService service;
-
-    //소환사 기본정보
-    @GetMapping("/summoner/{sName}")
-    public String getSummoner(@PathVariable String sName) {
-        System.out.println("===============SUMMONER INFO==================");
-        return "test~~~~~";
+    
+    @GetMapping("/test")
+    public String test(){
+        return "test";
     }
 
     //소환사 검색

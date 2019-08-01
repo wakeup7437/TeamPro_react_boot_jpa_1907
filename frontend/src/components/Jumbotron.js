@@ -13,7 +13,7 @@ class JumbotronPage extends Component {
     console.dir(this.input)
     console.dir(this.input.value)
     console.dir(this.props)
-    this.props.history.push('/search/'+this.input.value)
+    this.props.history.push('/lol/search/'+this.input.value)
   }
   render(){
   return (

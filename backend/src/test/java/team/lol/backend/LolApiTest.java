@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import team.lol.backend.domain.SummonerDto;
-import team.lol.backend.util.RestTemplateUtil;
+import team.lol.backend.util.LolApiService;
 
 /**
  * LolApiTest
@@ -22,7 +22,7 @@ import team.lol.backend.util.RestTemplateUtil;
 public class LolApiTest {
 
     @Autowired
-    RestTemplateUtil util;
+    LolApiService util;
 
     @Test
     public void jsonRequestTest(){
@@ -65,7 +65,7 @@ public class LolApiTest {
     }
     @Test
     public void DtoTest(){
-        SummonerDto dto=util.test("채형국");
+        //SummonerDto dto=.test("채형국");
     }
     
 }

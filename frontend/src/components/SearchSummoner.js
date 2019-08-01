@@ -7,7 +7,8 @@ class SearchSummoner extends Component{
     constructor(props){
         super(props)
         this.state={
-            data:{}
+            data:[],
+            user:{}
         }
     }
     sname=this.props.match.params.sname
@@ -18,12 +19,12 @@ class SearchSummoner extends Component{
         axios.get(this.url+'/lol/search/'+this.sname)
         .then(d=>{
             console.log(d.data)
-            console.log(d.data[0].tier)
+            //console.log(d.data.tier)
             this.setState({
-                data:d.data[1]
+                data:d.data.matches,
+                user:d.data.user
             })
-            this.test=d.data[1]
-            console.log(this.test)
+            console.log(this.state.user)
             console.log(this.state.data)
         })
         .catch(e=>{
@@ -35,30 +36,42 @@ class SearchSummoner extends Component{
     // test=()=>{
     //     let d=this.state.data
     //     for(let v in d){
-    //         console.log(v+':'+d[v])
-    //         console.dir(v)
+    //         // console.log(v+':'+d[v])
+    //         // console.dir(v)
+    //         d.push(<div key={v}>test</div>)
     //     }
+    //     return d
     // }
     render(){
         console.dir(this.state.data)
         //this.test()
-        const {data}=this.state
+        const user=this.state.user
+        const rate=Math.round(user.wins*100/(user.wins+user.losses))
+        const data=this.state.data
+        //const list=this.state.data.map((v,i)=>{})
+        //const list=this.test()
+        const now=Date.now()
+        const test=data.map((v,i)=>
+        <div key={i}>{Math.round((now-v.timestamp)/1000/60/60/24)}일 전</div>
+        )
+        
         return(
         <>
             <MDBCard style={{ width: "15rem" }}>
                 <MDBCardHeader>
-                    {data.summonerName}
+                    {user.name} LV_{user.summonerLevel}
                 </MDBCardHeader>
-                <MDBCardImage className="img-fluid" src="http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Aatrox_0.jpg" waves />
+                <MDBCardImage className="" src={`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/profileicon/${user.profileIconId}.png`} waves/>
                 <MDBCardBody>
-                <MDBCardTitle>{}{data.tier}_{data.rank}</MDBCardTitle>
+                <MDBCardTitle>{user.tier}_{user.rank}</MDBCardTitle>
                 <MDBCardText>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card&apos;s content.
+                    LP {user.leaguePoints}<br/>
+                    wins {user.wins} / losses {user.losses}<br/>
+                    rate:{rate}
                 </MDBCardText>
-                <MDBBtn href="#">MDBBtn</MDBBtn>
                 </MDBCardBody>
             </MDBCard>
+            {test}
         </>
             )
     }
