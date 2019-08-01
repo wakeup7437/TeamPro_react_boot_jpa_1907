@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import team.lol.backend.domain.UserDto;
 import team.lol.backend.entities.User;
 import team.lol.backend.repositories.UserRepository;
 import java.util.UUID;
@@ -24,6 +26,7 @@ import team.lol.backend.util.EmailSendUtill;
 @RequestMapping("/users")
 public class UserController {
     @Autowired UserRepository repo;
+    @Autowired UserDto udto;
 
 
     
@@ -45,11 +48,11 @@ public class UserController {
     }
     
     @PutMapping("/update")
-    public String update(@RequestBody User user){
-        User entity = repo.findById(user.getUno()).get();
-        if(entity.getPassword().equals(user.getPassword()))
+    public String update(@RequestBody UserDto udto){
+        User entity = repo.findById(udto.getUno()).get();
+        if(entity.getPassword().equals(udto.getPassword()))
         {
-            entity.setPassword(user.getNpass());
+            entity.setPassword(udto.getNpass());
             repo.save(entity);
             return "Update";
         }else{

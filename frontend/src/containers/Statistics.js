@@ -45,8 +45,8 @@ render(){
     )
     return(
       <MDBRow center>
-        <MDBContainer className="white col-md-10"  >
-        <MDBTable  bordered> 
+        <MDBContainer className="white col-md-10 "  >
+        <MDBTable  bordered striped> 
       <MDBTableHead>
         <tr>
           <th width="10">#</th>

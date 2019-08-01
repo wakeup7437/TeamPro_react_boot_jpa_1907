@@ -6,26 +6,17 @@ const Footer = () => (
     <MDBContainer fluid className="text-center text-md-left">
       <MDBRow>
         <MDBCol md="8">
-          <h5 className="title">Footer Content</h5>
-          <p>
-            Here you can use rows and columns here to organize your footer
-            content.
-          </p>
+          <h5 className="title">API LINK</h5>
+          <a href="https://developer.riotgames.com/"> DEVELOPER LOL API</a>
         </MDBCol>
         <MDBCol md="4">
-          <h5 className="title">Teams</h5>
+          <h5 className="title">Teams Github</h5>
           <ul>
             <li className="list-unstyled">
-              <a href="#!">Ki-sang Yoo</a>
+              <a href="https://github.com/wakeup7437/TeamPro_react_boot_jpa_1907">Ki-sang Yoo</a>
             </li>
             <li className="list-unstyled">
               <a href="#!">Hyeoung-guk Chae</a>
-            </li>
-            <li className="list-unstyled">
-              <a href="#!">Link 3</a>
-            </li>
-            <li className="list-unstyled">
-              <a href="#!">Link 4</a>
             </li>
           </ul>
         </MDBCol>

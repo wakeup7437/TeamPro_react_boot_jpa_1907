@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 class BoardWrite extends Component{
         
     state={
-        writer:JSON.parse(sessionStorage.getItem('userName')),  
+        writer:sessionStorage.getItem('userName'),  
         title:'',
         category:'',
         content:''

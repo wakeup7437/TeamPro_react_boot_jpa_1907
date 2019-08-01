@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, } from "react-router-dom";
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
 MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBBtn ,MDBBtnGroup  } from "mdbreact";
 import Board from '../containers/Board'
-import Jumbotron from './Jumbotron'
+import Jumbotron from './Jumbotron.js'
 import "./Navbar.css"
 import Join from "../containers/Join.jsx";
 import Mypage from "../containers/Mypage.js";
