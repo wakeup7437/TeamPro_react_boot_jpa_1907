@@ -1,5 +1,8 @@
 package team.lol.backend.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -16,11 +19,14 @@ public class SummonerDto {
     //public String puuid;	
     private long summonerLevel;
     //public long revisionDate;
-    private String id;		
+    @JsonProperty(access = Access.WRITE_ONLY)
+    private String id;
+    //@JsonProperty(access = Access.WRITE_ONLY)	
     private String accountId;
 
     private int wins;
     private int losses;
+    private int leaguePoints;
 
     private String tier;
     private String rank; 

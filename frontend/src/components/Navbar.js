@@ -138,7 +138,7 @@ const astyle={
     <Route path="/modify/:bno" component={BoardModify}/>
     <Route path="/statistics" component={Statistics}/>
     <Route path="/write" component={BoardWrite}/>
-    <Route path="/search/:sname" component={SearchSummoner}/>
+    <Route path="/lol/search/:sname" component={SearchSummoner}/>
     </Router>
     );
   }
