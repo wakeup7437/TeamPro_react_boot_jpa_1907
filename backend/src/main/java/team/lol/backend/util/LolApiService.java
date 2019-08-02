@@ -1,21 +1,18 @@
 package team.lol.backend.util;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import team.lol.backend.domain.GameDto;
 import team.lol.backend.domain.GameListDto;
 import team.lol.backend.domain.MatchDto;
+import team.lol.backend.domain.PlayerDto;
 import team.lol.backend.domain.SummonerDto;
 
 @Service
@@ -23,7 +20,7 @@ public class LolApiService {
 
 
     private static final String API_URL="https://kr.api.riotgames.com";
-    private static final String API_KEY="RGAPI-e10cfa7b-cbcf-4a98-a60e-68785c80408a";
+    private static final String API_KEY="RGAPI-2b7c2f7a-bf0d-4f64-9908-274fd3bf7904";
     private static final String HEADER_PARAM="X-Riot-Token";
 
     @Bean
@@ -48,26 +45,52 @@ public class LolApiService {
         dto2.setSummonerLevel(dto1.getSummonerLevel());
         dto2.setAccountId(dto1.getAccountId());
         dto2.setId(dto1.getId());
+        System.out.println("3:"+dto2);
         
-        GameListDto map=getListByAccountId(dto2.getAccountId(),0,10);
+        
+        System.out.println("=============GET SUMMONER END================");
+        return dto2;
+    }
+    public Object getGameList(String accountId,int startIndex,int endIndex){
+        GameListDto map=getListByAccountId(accountId,startIndex,endIndex);
+        //List<GameDto> list=map.getMatches();
         System.out.println("=====list start=====");
-        List<GameDto> list=map.getMatches();
-        list.forEach(game->{
-            //System.out.println(game);
-            //System.out.println("========unit game end==========");
+        map.getMatches().forEach(game->{
             MatchDto match=getGameDetailByGameId(game.getGameId());
             game.setGameDuration(match.getGameDuration());
             game.setMatch(match);
-            //System.out.println(match);
-            match.getPlayersList().forEach(a->{
-                //System.out.println("player: "+a);
+            Integer id=new Integer(-1);
+            List<PlayerDto> plist=match.getPlayersList();
+            for(PlayerDto p : plist){
+                Map<String,String> m=p.getPlayer();
+                // if(dto2.getName().equals(m.get("summonerName"))){
+                //     p.setProfileIcon(m.get("profileIcon"));
+                //     p.setSummonerName(m.get("summonerName"));
+                //     id=p.getParticipantId();
+                // }
+            }
+
+            // match.getPlayersList().forEach(p->{
+            //     Map<String,String> m=p.getPlayer();
+            //     if(dto2.getName().equals(m.get("summonerName"))){
+            //         p.setProfileIcon(m.get("profileIcon"));
+            //         p.setSummonerName(m.get("summonerName"));
+            //         id=p.getParticipantId();
+            //     }  
+            // });
+            final int intid=id;
+            match.getParticipants().forEach(p->{
+                if(intid==p.getParticipantId()){
+                    System.out.println(p.getStats());
+                    System.out.println();
+                    game.setStat(p.getStats());
+                }
             });
             //System.out.println("=====unit game detail end=======");
             game.getChampion();
         });
-        map.setUser(dto2);
-        System.out.println("=============GET SUMMONER END================");
-        return map;
+        
+        return null;
     }
 
 

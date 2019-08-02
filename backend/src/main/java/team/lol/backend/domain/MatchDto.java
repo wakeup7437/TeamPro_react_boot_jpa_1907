@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 
 /**
- * MatchDto 
+ * MatchDto is Detail of game
  */
 @Component @Data @Lazy
 public class MatchDto {
@@ -20,7 +20,7 @@ public class MatchDto {
 
     private int mapId;
     //private List<Object> teams;
-    //private List<Object> participants;
+    private List<PlayerDetailDto> participants;
 
     private Long gameDuration;
 }
