@@ -17,6 +17,7 @@ import BoardModify from "../containers/BoardModify";
 import BoardWrite from "../containers/BoardWrite";
 import Statistics from "../containers/Statistics"
 import SearchSummoner from './SearchSummoner'
+import Rankpage from "./Rankpage";
 
 
 class Navbar extends Component {
@@ -87,7 +88,7 @@ const astyle={
             <MDBNavLink to="/statistics">챔피언 목록</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
-            <MDBNavLink to="#!">랭킹</MDBNavLink>
+            <MDBNavLink to="rank">랭킹</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
             <MDBNavLink to="/board">게시판</MDBNavLink>
@@ -139,6 +140,7 @@ const astyle={
     <Route path="/statistics" component={Statistics}/>
     <Route path="/write" component={BoardWrite}/>
     <Route path="/lol/search/:sname" component={SearchSummoner}/>
+    <Route path="/rank" component={Rankpage}/>
     </Router>
     );
   }

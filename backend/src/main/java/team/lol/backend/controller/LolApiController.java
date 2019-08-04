@@ -32,9 +32,9 @@ public class LolApiController {
     }
 
     //랭킹
-    @GetMapping("/rank/{param}")
-    public String getMethodName(@RequestParam String param) {
-        return null;
+    @GetMapping("/rank")
+    public Object getRank() {
+        return service.getRanking();
     }
     
     

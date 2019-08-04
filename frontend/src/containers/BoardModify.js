@@ -18,7 +18,7 @@ class BoardModify extends Component{
     save=()=>{
         console.log('save')
         console.log(this.props.previnfo)
-        axios.put('http://localhost:3000/modify',this.props.board)
+        axios.put('/modify',this.props.board)
         .then(()=>{
                this.props.history.replace("/detail/"+this.props.match.params.bno)
         })

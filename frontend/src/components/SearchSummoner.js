@@ -111,11 +111,11 @@ class SearchSummoner extends Component{
         }
     }
     sname=this.props.match.params.sname
-    url = 'http://localhost:8080'
     test=''
 
     componentDidMount(){
-        axios.get(this.url+'/lol/search/'+this.sname)
+        console.dir(axios.defaults.baseURL)
+        axios.get('/lol/search/'+this.sname)
         .then(d=>{
             console.log(d.data)
             //console.log(d.data.tier)
@@ -130,6 +130,16 @@ class SearchSummoner extends Component{
         })
         
         
+    }
+    loadList=()=>{
+
+    }
+    list=()=>{
+        return (
+            <div>
+                <button onClick={this.loadList()}>load data</button>
+            </div>
+        )
     }
     // test=()=>{
     //     let d=this.state.data
@@ -148,7 +158,7 @@ class SearchSummoner extends Component{
         const data=this.state.data
         const now=Date.now()
         const test=data.map((v,i)=>
-        <MDBListGroupItem key={i}>
+        <MDBListGroupItem key={i} color="primary">
             <MDBRow>
                 <MDBCol size="2">
                 <div>
@@ -183,13 +193,14 @@ class SearchSummoner extends Component{
                 <MDBCardHeader>
                     {user.name} LV_{user.summonerLevel}
                 </MDBCardHeader>
-                <MDBCardImage className="" src={`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/profileicon/${user.profileIconId}.png`} waves/>
+                <MDBCardImage className="" src={`http://ddragon.leagueoflegends.com/cdn/9.15.1/img/profileicon/${user.profileIconId}.png`} waves/>
                 <MDBCardBody>
                 <MDBCardTitle>{user.tier}_{user.rank}</MDBCardTitle>
                 <MDBCardText>
-                    LP {user.leaguePoints}<br/>
-                    wins {user.wins} / losses {user.losses}<br/>
-                    rate:{rate}
+                    <div>LP {user.leaguePoints}</div>
+                    <div>wins {user.wins} / losses {user.losses}</div>
+                    <div>rate:{rate}%</div>
+                    {this.list()}
                 </MDBCardText>
                 </MDBCardBody>
             </MDBCard>

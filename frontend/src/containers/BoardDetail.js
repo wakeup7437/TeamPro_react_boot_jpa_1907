@@ -8,12 +8,10 @@ const BoardDetail=(props)=>{
     const {bno}=props.match.params
     const [data,setData]=useState({})
     const [rlist,setList]=useState([])
-    const serverURL='http://localhost:8080'
     
     //init
     useEffect(()=>{
-    let url = "http://localhost:8080/board/detail/"+bno
-    axios.get(url)
+    axios.get('/board/detail/'+bno)
     .then((d)=>{
         console.log(d.data)
         d.data.regdate=d.data.regdate.split('T')[0]
@@ -46,7 +44,7 @@ const BoardDetail=(props)=>{
         let flag=window.confirm('Are You Sure?')
         if(flag){
             window.alert('yes')
-            axios.delete("http://localhost:8080/board/delete/"+bno)
+            axios.delete("/board/delete/"+bno)
             .then(r=>{
                 if(r){ 
                     alert('success')
@@ -83,19 +81,20 @@ const BoardDetail=(props)=>{
     const addReply=()=>{
         let data={
             reply:replyInput.state.innerValue,
-            replyer:data.writer,
+            replyer:props.userinfo.userName,
             bno:bno
         }
-        axios.post(serverURL+'/reply/insert',data)
+        axios.post('/reply/insert',data)
         .then((r)=>{
             alert('댓글 추가 성공')
-            props.history.replace('/detail/'+bno)
+            props.history.push('/board')
         })
         .catch((e)=>{
             alert('댓글 추가 실패')
         })
     }
     
+    console.log(props)
     return (
     <MDBContainer>
         <MDBCard>

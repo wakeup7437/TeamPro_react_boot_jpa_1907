@@ -50,8 +50,7 @@ class Board extends Component{
     }
     
     componentDidMount(){
-      let url = "http://localhost:8080"
-      axios.get(url+'/board/all')
+      axios.get('/board/all')
       .then((d)=>{
         d.data.forEach(e => {
           e.replies=<MDBBadge color="primary" pill>{e.replies.length}</MDBBadge>

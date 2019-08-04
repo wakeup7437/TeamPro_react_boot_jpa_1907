@@ -20,7 +20,7 @@ public class LolApiService {
 
 
     private static final String API_URL="https://kr.api.riotgames.com";
-    private static final String API_KEY="RGAPI-2b7c2f7a-bf0d-4f64-9908-274fd3bf7904";
+    private static final String API_KEY="RGAPI-c031daa5-dde2-4023-b669-a80e99e6c669";
     private static final String HEADER_PARAM="X-Riot-Token";
 
     @Bean
@@ -100,6 +100,11 @@ public class LolApiService {
         return rt.getForObject(url,String.class);
     }
 
+    //랭킹
+    public Object getRanking(){
+        String url=API_URL+"/lol/league-exp/v4/entries/RANKED_SOLO_5x5/CHALLENGER/I?api_key="+API_KEY;
+        return rt.getForObject(url,List.class);
+    }
 
 /////private method
 
