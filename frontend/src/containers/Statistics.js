@@ -15,14 +15,14 @@ class DatatablePplaynum extends Component{
 }
 
 componentDidMount(){
-      let url = "http://ddragon.leagueoflegends.com/cdn/6.24.1/data/ko_KR/champion.json"
+      let url = "http://ddragon.leagueoflegends.com/cdn/9.15.1/data/ko_KR/champion.json"
       axios.get(url)
       .then((res)=>{
         let gg=[];
         for(var i in res.data.data){
           gg.push(res.data.data[i])
         }
-        // console.dir(gg)
+        console.dir(gg)
         this.setState({
           data:gg
         })
@@ -38,7 +38,7 @@ render(){
     this.state.data.map((v,i)=>
       <tr key={i}>
           <td>{i+1}</td>
-          <td align="left"> <img src={`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/${v.image.full}`} width="50" height="50"/> {v.name}</td>
+          <td align="left"> <img src={`http://ddragon.leagueoflegends.com/cdn/9.15.1/img/champion/${v.image.full}`} width="50" height="50"/> {v.name}</td>
           <td align>{v.blurb.replace(/<br>/gi,"")}</td>
           <td>{v.title}</td>
       </tr>

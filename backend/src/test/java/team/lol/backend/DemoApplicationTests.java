@@ -41,8 +41,8 @@ public class DemoApplicationTests {
 		IntStream.range(0, 200).forEach(i->{
 			Board b=new Board();
 			b.setTitle("title"+i);
-			Category cate=EnumType.valueOf(Category.class,"1");
-			//b.setCategory(cate);//i%5+1);
+			Category cate=Board.Category.values()[(i%5)];
+			b.setCategory(cate);//i%5+1);
 			b.setWriter("writer"+i);
 			b.setContent("content..."+i);
 

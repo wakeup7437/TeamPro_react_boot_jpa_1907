@@ -8,22 +8,24 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 
 /**
- * GameDto
+ * GameDto 게임 한판에 대한 가공 데이터
  */
 @Component @Lazy @Data
 public class GameDto {
     private Long gameId;
     private int champion;
-    private Long timestamp;
+    
     private String role;
     private String lane;
     //platformId=KR
     //queue=420
     //season=13
+    private Long timestamp;
 
-    private Boolean winner;
+    //custom set
+    private Boolean win;
     private Long gameDuration;
-    //private List<GameUserDto> teams;
-    private MatchDto match;
+    private List<UserInfo> teams;
+    //private MatchDto match;
     private StatsDto stat;
 }

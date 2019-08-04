@@ -1,7 +1,9 @@
 package team.lol.backend.util;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -12,15 +14,18 @@ import org.springframework.web.client.RestTemplate;
 import team.lol.backend.domain.GameDto;
 import team.lol.backend.domain.GameListDto;
 import team.lol.backend.domain.MatchDto;
+import team.lol.backend.domain.PlayerDetailDto;
 import team.lol.backend.domain.PlayerDto;
+import team.lol.backend.domain.StatsDto;
 import team.lol.backend.domain.SummonerDto;
+import team.lol.backend.domain.UserInfo;
 
 @Service
 public class LolApiService {
 
 
     private static final String API_URL="https://kr.api.riotgames.com";
-    private static final String API_KEY="RGAPI-c031daa5-dde2-4023-b669-a80e99e6c669";
+    private static final String API_KEY="RGAPI-36c0d457-9a6a-40f6-a70a-32ea5cbb5eb8";
     private static final String HEADER_PARAM="X-Riot-Token";
 
     @Bean
@@ -53,44 +58,54 @@ public class LolApiService {
     }
     public Object getGameList(String accountId,int startIndex,int endIndex){
         GameListDto map=getListByAccountId(accountId,startIndex,endIndex);
-        //List<GameDto> list=map.getMatches();
+        
         System.out.println("=====list start=====");
+        
+        //GameDto 
         map.getMatches().forEach(game->{
+            
+            //System.out.println("====start list one====");
             MatchDto match=getGameDetailByGameId(game.getGameId());
+            //System.out.println("====end list one=====");
             game.setGameDuration(match.getGameDuration());
-            game.setMatch(match);
+            //game.setMatch(match);
             Integer id=new Integer(-1);
-            List<PlayerDto> plist=match.getPlayersList();
-            for(PlayerDto p : plist){
-                Map<String,String> m=p.getPlayer();
-                // if(dto2.getName().equals(m.get("summonerName"))){
-                //     p.setProfileIcon(m.get("profileIcon"));
-                //     p.setSummonerName(m.get("summonerName"));
-                //     id=p.getParticipantId();
-                // }
-            }
 
-            // match.getPlayersList().forEach(p->{
-            //     Map<String,String> m=p.getPlayer();
-            //     if(dto2.getName().equals(m.get("summonerName"))){
-            //         p.setProfileIcon(m.get("profileIcon"));
-            //         p.setSummonerName(m.get("summonerName"));
-            //         id=p.getParticipantId();
-            //     }  
-            // });
-            final int intid=id;
-            match.getParticipants().forEach(p->{
-                if(intid==p.getParticipantId()){
-                    System.out.println(p.getStats());
-                    System.out.println();
-                    game.setStat(p.getStats());
+            List<UserInfo> teams=new ArrayList<>();
+            for(PlayerDto p : match.getPlayersList()){
+                
+                Map<String,String> m=p.getPlayer();
+                if(accountId.equals(m.get("accountId"))){
+                    p.setProfileIcon(m.get("profileIcon"));
+                    p.setSummonerName(m.get("summonerName"));
+                    id=p.getParticipantId();
+                    //System.out.println("==find==id: "+id);
                 }
-            });
-            //System.out.println("=====unit game detail end=======");
-            game.getChampion();
+                UserInfo user=new UserInfo();
+                user.setParticipantId(p.getParticipantId());
+                user.setName(m.get("summonerName"));
+                teams.add(user);
+            }
+            
+            final int intid=id;
+            //System.out.println("XXXXid?: "+id);
+            //여기서 팀원정보 가져올것
+            int teamId=-1;
+            for(int i=0;i<10;i++){
+                PlayerDetailDto pd= match.getParticipants().get(i);
+                UserInfo user=teams.get(i);
+                if(intid==pd.getParticipantId()){
+                    teamId=pd.getTeamId();
+                    game.setStat(pd.getStats());
+                    game.setWin(pd.getStats().getWin());
+                }
+                user.setChamp(pd.getChampionId());
+                user.setTeamId(pd.getTeamId());
+            } 
+            game.setTeams(teams);
         });
         
-        return null;
+        return map;
     }
 
 

@@ -1,6 +1,7 @@
 package team.lol.backend.domain;
 
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -19,7 +20,7 @@ public class MatchDto {
     private List<PlayerDto> playersList;
 
     private int mapId;
-    //private List<Object> teams;
+    private List<Map<String,Object>> teams;
     private List<PlayerDetailDto> participants;
 
     private Long gameDuration;

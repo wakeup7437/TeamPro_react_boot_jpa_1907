@@ -14,6 +14,6 @@ public class StatsDto {
     private int kills;
     private int assists;
     private int deaths;
-    private boolean win;
+    private Boolean win; //다시하기때문에 사용불가
 
 }

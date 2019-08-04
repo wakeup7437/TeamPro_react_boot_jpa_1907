@@ -82,13 +82,10 @@ const astyle={
              <MDBNavLink to="/">홈</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
-            <MDBNavLink to="#!">챔피언 분석</MDBNavLink>
-          </MDBNavItem>
-          <MDBNavItem>
             <MDBNavLink to="/statistics">챔피언 목록</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
-            <MDBNavLink to="rank">랭킹</MDBNavLink>
+            <MDBNavLink to="/rank">랭킹</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
             <MDBNavLink to="/board">게시판</MDBNavLink>
