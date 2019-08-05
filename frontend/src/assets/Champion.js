@@ -117,7 +117,6 @@ const Champion=(id)=>
     case 6: return "Urgot"; 
     case 203: return "Kindred"; 
     case 21: return "MissFortune"; 
-    case 62: return "Wukong"; 
     case 53: return "Blitzcrank"; 
     case 98: return "Shen"; 
     case 201: return "Braum"; 
@@ -142,6 +141,9 @@ const Champion=(id)=>
     case 141: return "Kayn"; 
     case 246: return "Qiyana"; 
     case 497: return "Rakan"; 
+    case 62: return "MonkeyKing";
+    case 498: return "Xayah";
+    case 516: return "Ornn";
     }
 }
 export default Champion

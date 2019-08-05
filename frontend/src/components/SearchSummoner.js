@@ -25,21 +25,26 @@ class SearchSummoner extends Component{
                 user:d.data,
                 accountId:d.data.accountId,
             })
-            console.log(this.state.user)
+            //console.log(this.state.user)
             axios.get('/lol/list/'+d.data.accountId+'?startIndex=0')
             .then(d2=>{
-                console.dir(d2.data)
+                //console.dir(d2.data)
                 this.load=true
                 this.setState({
                     data:d2.data.matches,
                     startIndex:d2.data.endIndex+1
                 })
-                console.log(d2.data.endIndex+1)
-                console.log(this.state.startIndex)
+                //console.log(d2.data.endIndex+1)
+                //console.log(this.state.startIndex)
+            })
+            .catch((e)=>{
+                alert('전적리스트를 불러오는 중 오류가 발생했습니다. 홈으로 돌아갑니다.')
+                this.props.history.push('/')
             })
         })
         .catch(e=>{
-            console.log(e)
+            alert('유효하지 않은 이름입니다.')
+            this.props.history.push('/')
         })
     }
     loadMoreList=()=>{
@@ -60,6 +65,7 @@ class SearchSummoner extends Component{
         })
         .catch((e)=>{
             alert(e)
+            
         })
     }
     innerList=(d,i)=>{
@@ -159,7 +165,7 @@ class SearchSummoner extends Component{
                 </MDBCardBody>
             </MDBCard>
         </MDBCol>
-        <MDBCol md="7" font-size="xx-small">
+        <MDBCol md="7">
             <MDBListGroup>
                 <Suspense fallback={<div>loading...</div>}>
                 {this.load?

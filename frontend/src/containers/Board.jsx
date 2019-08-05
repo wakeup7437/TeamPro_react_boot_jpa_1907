@@ -20,21 +20,18 @@ class Board extends Component{
         {
           label: 'Title',
           field: 'title',
-          width: 200
+          width: 50
         },
         {
           label: 'Category',
           field: 'category',
-        },
-        {
-          label: 'Recommend',
-          field: 'recommend',
+          width: 10
         },
         {
           label: 'Regdate',
           field: 'regdate',
           sort: 'desc',
-          width: 100
+          width: 10
         },
         {
           label: 'Reply',
@@ -56,6 +53,8 @@ class Board extends Component{
           e.replies=<MDBBadge color="primary" pill>{e.replies.length}</MDBBadge>
           e.regdate=e.regdate.split('T')[0]
           delete e.content
+          delete e.recommend
+          delete e.updatedate
           e.detail=<MDBBtn color="dark-green" size="sm" onClick={()=>this.btnClick(e.bno)}>Detail</MDBBtn>
         })
         this.cAndr.rows=d.data

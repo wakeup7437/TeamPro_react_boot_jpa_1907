@@ -48,7 +48,7 @@ const BoardDetail=(props)=>{
             .then(r=>{
                 if(r){ 
                     alert('success')
-                    props.history.push('/boards')
+                    props.history.push('/board')
                 }
                 else alert('fail to server')
             })
@@ -120,7 +120,7 @@ const BoardDetail=(props)=>{
         
         </MDBCard>
         <br/>
-        <MDBListGroup>
+        <MDBListGroup className='col-11'>
             <MDBCardHeader className="p-3 text-left bg-white">
                 <MDBRow><h3>Replies </h3> <label className="p-2">total{rlist.length}</label> </MDBRow>
                 {props.login?

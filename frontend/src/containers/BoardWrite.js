@@ -50,7 +50,7 @@ class BoardWrite extends Component{
                         className="d-inline browser-default custom-select inline"
                         id="category" onChange={this.handleChange}
                     >
-                    <option value="FREE" selected>자유</option>
+                    <option value="FREE" select="true">자유</option>
                     <option value="CATE1">CATEGORY1</option>
                     <option value="CATE2">CATEGORY2</option>
                     <option value="CATE3">CATEGORY3</option>

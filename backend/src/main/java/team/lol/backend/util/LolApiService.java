@@ -25,7 +25,7 @@ public class LolApiService {
 
 
     private static final String API_URL="https://kr.api.riotgames.com";
-    private static final String API_KEY="RGAPI-36c0d457-9a6a-40f6-a70a-32ea5cbb5eb8";
+    private static final String API_KEY="RGAPI-bacc7f87-b6bb-44f3-b484-a2879353b986";
     private static final String HEADER_PARAM="X-Riot-Token";
 
     @Bean
@@ -38,17 +38,17 @@ public class LolApiService {
     //Sercice//
 
     public Object getSummoner(String sName){
-        //System.out.println("=====GET SUMMONER====");
+        System.out.println("=====GET SUMMONER====");
         SummonerDto dto1= getUnitInfoByNickName(sName);
         SummonerDto dto2=getUserLeagueBySummonerId(dto1.getId());
-        
+        System.out.println("====line======");
         dto2.setProfileIconId(dto1.getProfileIconId());
         dto2.setName(dto1.getName());
         dto2.setSummonerLevel(dto1.getSummonerLevel());
         dto2.setAccountId(dto1.getAccountId());
         dto2.setId(dto1.getId());  
         
-        //System.out.println("=============GET SUMMONER END================");
+        System.out.println("=============GET SUMMONER END================");
         return dto2;
     }
     public Object getGameList(String accountId,int startIndex,int endIndex){

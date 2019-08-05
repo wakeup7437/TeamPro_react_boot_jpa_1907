@@ -10,6 +10,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -25,6 +27,7 @@ import lombok.ToString;
 @Setter
 @Entity
 @DynamicInsert
+@DynamicUpdate
 @ToString
 @Table(name = "boards")
 public class Board {
@@ -54,10 +57,12 @@ public class Board {
     @Column(name="recommend") @ColumnDefault("0") String recommend;
 
     @CreationTimestamp private Timestamp regdate;
+    @JsonIgnore
+    @UpdateTimestamp private Timestamp updatedate;
 
-    //@JsonIgnore
+    
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="bno")
+    @JoinColumn(name="bno")@Column(nullable = true)
     private List<Reply> replies;
     
 }

@@ -15,6 +15,6 @@ export const boardModify = (data)=>{
     return {
         type:'BOARD_MODIFY',
         bmodify:true,
-        previnfo:data
+        prevdata:data
     }
 }

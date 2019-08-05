@@ -58,8 +58,6 @@ isLogout=()=>{
   })
   this.props.dispatch(logout())
 }
-  
-
 render() {
 const bstyle={
   padding:"13.44px 25px"

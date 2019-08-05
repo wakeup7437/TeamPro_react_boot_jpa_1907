@@ -81,7 +81,7 @@ public class DemoApplicationTests {
 		BoardDto dto=new BoardDto();
 		list.forEach(i->{
 			dto.setBno(i.getBno());
-			dto.setCategory(i.getCategory().toString());
+			dto.setCategory(i.getCategory());
 			dto.setRecommend(i.getRecommend());
 			dto.setRegdate(i.getRegdate());
 			dto.setReplies(i.getReplies().size());

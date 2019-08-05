@@ -30,7 +30,6 @@ public class Reply {
 
     @CreationTimestamp
     private Timestamp replydate;
-
     
     private Long bno;
 }

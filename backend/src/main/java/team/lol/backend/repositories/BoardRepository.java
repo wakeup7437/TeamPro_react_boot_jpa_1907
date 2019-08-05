@@ -15,6 +15,6 @@ public interface BoardRepository extends PagingAndSortingRepository<Board,Long>{
     //read
     public Page<Board> findByBnoGreaterThanOrderByBnoDesc(Long bno,Pageable page);
 
-    @Query()
-    public Object[] findByBno(Long bno);
+    
+    public Board findByBno(Long bno);
 }

@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
+import team.lol.backend.entities.Board.Category;
 
 /**
  * BoardDto
@@ -16,7 +17,7 @@ public class BoardDto {
     private Long bno;
     private String writer;
     private String title;
-    private String category;
+    private Category category;
     private String recommend;
 
     private Timestamp regdate;

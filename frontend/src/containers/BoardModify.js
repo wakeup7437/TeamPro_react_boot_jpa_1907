@@ -5,19 +5,28 @@ import {connect} from 'react-redux'
 import {boardModify} from '../actions'
 
 class BoardModify extends Component{
-    
+    constructor(){
+        super()
+        this.state={
+            category:"FREE"
+    }
+    }
     handleChange=(e)=>{
-        const data={[e.target.id]:e.target.value}
-        this.props.dispatch(boardModify(data))
-        //console.dir(this.props)
+        this.setState({[e.target.id]:e.target.value})
+        this.data={[e.target.id]:e.target.value}
+        this.props.dispatch(boardModify(this.data))
+        console.dir(this.data)
+        console.log(this.props.prevdata)
+        console.log(this.state)
     }
     cancel=()=>{
         this.props.history.push('/')
     }
     save=()=>{
-        //console.log('save')
-        //console.log(this.props.previnfo)
-        axios.put('/modify',this.props.board)
+        console.log(this.props.login.userinfo.userName)
+        this.setState({bno:this.props.match.params.bno,
+            writer:this.props.login.userinfo.userName})
+        axios.put('/board/update',this.state)
         .then(()=>{
             this.props.history.replace("/detail/"+this.props.match.params.bno)
         })
@@ -26,8 +35,8 @@ class BoardModify extends Component{
         })
     }
     render(){
-    const {previnfo}=this.props
-    //console.log(previnfo)
+    const {prevdata}=this.props.board
+    //console.log(prevdata)
     return (
     <MDBContainer>
         <MDBCard>
@@ -42,7 +51,7 @@ class BoardModify extends Component{
                     size="lg"
                     id="title"
                     onChange={this.handleChange}
-                    value={previnfo.title}
+                    value={prevdata.title}
                   />
             <MDBRow>
                 <MDBCol size="6">
@@ -54,7 +63,7 @@ class BoardModify extends Component{
                         className="d-inline browser-default custom-select inline"
                         id="category" onChange={this.handleChange} 
                     >
-                    <option value="FREE">자유</option>
+                    <option value="FREE" select="true">자유</option>
                     <option value="CATE1">CATEGORY1</option>
                     <option value="CATE2">CATEGORY2</option>
                     <option value="CATE3">CATEGORY3</option>
@@ -72,7 +81,7 @@ class BoardModify extends Component{
                     rows="10"
                     className="form-control"
                     onChange={this.handleChange}
-                    value={previnfo.content}
+                    value={prevdata.content}
                     />
                 
             </MDBCardBody>
@@ -85,6 +94,6 @@ class BoardModify extends Component{
     )}
 }
 const mapStateToProps = (state) =>{
-    return state.board
+    return state
   }
 export default connect(mapStateToProps)(BoardModify)
