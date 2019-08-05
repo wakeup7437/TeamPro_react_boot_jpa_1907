@@ -39,8 +39,8 @@ const BoardDetail=(props)=>{
     },[])//init end
 
     const btnDel=()=>{
-        console.dir(props)
-        console.dir(props.userinfo)
+        //console.dir(props)
+        //console.dir(props.userinfo)
         let flag=window.confirm('Are You Sure?')
         if(flag){
             window.alert('yes')
@@ -58,8 +58,8 @@ const BoardDetail=(props)=>{
         }
     }
     const btnModifyOn=()=>{
-        console.log("then then")
-        console.dir(data)
+        //console.log("then then")
+        //console.dir(data)
         props.dispatch(boardModify(data))
         props.history.push("/modify/"+bno)
         

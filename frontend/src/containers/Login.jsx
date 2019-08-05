@@ -52,7 +52,7 @@ class Login extends Component{
             password : this.state.password
         }
 
-        axios.post('http://localhost:8080/users/login', data)
+        axios.post('/users/login', data)
 
         .then(res=> {
             if (res.data) {
@@ -79,7 +79,7 @@ class Login extends Component{
             email : this.state.email,
         }
 
-        axios.post('http://localhost:8080/users/email', data)
+        axios.post('/users/email', data)
         .then(res=> {
             if (res.data) {
                 alert('이메일에 임시비밀번호가 발송되었습니다.')

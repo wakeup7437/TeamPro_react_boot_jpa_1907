@@ -62,7 +62,7 @@ class Board extends Component{
         this.setState({loaded:true})
       })
       .catch((e)=>{
-        console.log("fail--"+e)
+        //console.log("fail--"+e)
         alert(e)
       })
     }

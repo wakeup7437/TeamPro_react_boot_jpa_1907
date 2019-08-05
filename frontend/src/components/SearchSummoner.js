@@ -43,25 +43,24 @@ class SearchSummoner extends Component{
         })
     }
     loadMoreList=()=>{
-        alert('loadmorelist')
+        //alert('loadmorelist')
         this.load=false
         axios.get('/lol/list/'+this.state.accountId+'?startIndex='+this.state.startIndex)
         .then((d)=>{
-          console.log(d.data)
-          console.log('more....')
+          //console.log(d.data)
+          //console.log('more....')
             this.load=true
             let d2=this.state.data.concat(d.data.matches)
-            console.dir(d2)
+            //console.dir(d2)
             this.setState({
                 data:d2,
                 startIndex:d.data.endIndex+1
             })
-            console.dir(this.state.data)
+            //console.dir(this.state.data)
         })
         .catch((e)=>{
             alert(e)
         })
-        return(<></>)
     }
     innerList=(d,i)=>{
         if(!this.load) return null

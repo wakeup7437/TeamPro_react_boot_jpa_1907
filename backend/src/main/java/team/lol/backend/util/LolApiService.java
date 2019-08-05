@@ -37,29 +37,23 @@ public class LolApiService {
     
     //Sercice//
 
-    //@Transactional
     public Object getSummoner(String sName){
-        System.out.println("=====GET SUMMONER====");
+        //System.out.println("=====GET SUMMONER====");
         SummonerDto dto1= getUnitInfoByNickName(sName);
-        System.out.println("1:"+dto1);
         SummonerDto dto2=getUserLeagueBySummonerId(dto1.getId());
         
-        System.out.println("2:"+dto2);
         dto2.setProfileIconId(dto1.getProfileIconId());
         dto2.setName(dto1.getName());
         dto2.setSummonerLevel(dto1.getSummonerLevel());
         dto2.setAccountId(dto1.getAccountId());
-        dto2.setId(dto1.getId());
-        System.out.println("3:"+dto2);
+        dto2.setId(dto1.getId());  
         
-        
-        System.out.println("=============GET SUMMONER END================");
+        //System.out.println("=============GET SUMMONER END================");
         return dto2;
     }
     public Object getGameList(String accountId,int startIndex,int endIndex){
         GameListDto map=getListByAccountId(accountId,startIndex,endIndex);
-        
-        System.out.println("=====list start=====");
+        //System.out.println("=====list start=====");
         
         //GameDto 
         map.getMatches().forEach(game->{

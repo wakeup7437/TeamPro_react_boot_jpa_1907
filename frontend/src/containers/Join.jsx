@@ -48,7 +48,7 @@ class Join extends Component{
           password : this.state.password
       }
       if(this.state.password === this.state.pCheck && this.state.email && this.state.userName && this.state.password && this.validate()) {
-          axios.post('http://localhost:8080/users/join', data)
+          axios.post('/users/join', data)
           .then(res=>{
             if(res.data){
               alert('회원가입성공')

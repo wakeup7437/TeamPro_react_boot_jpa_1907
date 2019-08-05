@@ -37,7 +37,7 @@ isLogin=(props)=>{
   this.setState({
     check : true
   })
-  console.dir(this.props)
+  //console.dir(this.props)
   
   this.props.dispatch(login({
     userName:sessionStorage.getItem('userName'),

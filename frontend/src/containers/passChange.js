@@ -35,7 +35,7 @@ class passChange extends Component{
           npass : this.state.npass
         }
             if(this.state.npass == this.state.nCheck && this.npass !='' && this.nCheck !=''){
-                Axios.put('http://localhost:8080/users/update',data)
+                Axios.put('/users/update',data)
                 .then(res=>{
                     if(res.data === "Update"){
                         alert("업데이트 성공")

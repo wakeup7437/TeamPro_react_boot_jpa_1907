@@ -42,7 +42,7 @@ public class BoardController {
     @GetMapping("/all")
     @Transactional
     public Iterable<Board> getBoardPage() {
-        System.out.println("===================getpage=====================================");
+        //System.out.println("===================getpage=====================================");
         Pageable page = PageRequest.of(0, 200,new Sort(Direction.DESC,"bno"));
         Page<Board> list =repo.findAll(page);
         System.out.println(list.getContent());
@@ -53,19 +53,19 @@ public class BoardController {
     public Object getDetail(@PathVariable String bno){
         Optional<Board> board = repo.findById(Long.valueOf(bno));
         if(board.isPresent()){
-            System.out.println("======board detail======"); 
+            //System.out.println("======board detail======"); 
         }     
         Board obj= board.get();
         List<Reply> list=obj.getReplies();
-        System.out.println(list);
+        //System.out.println(list);
         //obj.setReplies(list);
         return obj;
     }
     //입력
     @PostMapping("/insert")
     public Board insert(@RequestBody Board board){
-        System.out.println("=====insert=====");
-        System.out.println(board);
+        //System.out.println("=====insert=====");
+        //System.out.println(board);
         Board result=repo.save(board);
         return result;
     }
@@ -80,9 +80,9 @@ public class BoardController {
     @DeleteMapping("/delete/{bno}")
     public Boolean delete(@PathVariable String bno){
         
-        System.out.println("===========del=======================");
-        System.out.println("bno :"+bno);
-        System.out.println(repo.existsById(Long.valueOf(bno)));
+        //System.out.println("===========del=======================");
+        //System.out.println("bno :"+bno);
+        //System.out.println(repo.existsById(Long.valueOf(bno)));
         //int result = 
         //repo.deleteByBno(Long.valueOf(bno));
         //System.out.println("delete: "+result);

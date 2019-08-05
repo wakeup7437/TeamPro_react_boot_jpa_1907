@@ -9,38 +9,32 @@ class BoardModify extends Component{
     handleChange=(e)=>{
         const data={[e.target.id]:e.target.value}
         this.props.dispatch(boardModify(data))
-        console.dir(this.props)
+        //console.dir(this.props)
     }
-
     cancel=()=>{
         this.props.history.push('/')
     }
     save=()=>{
-        console.log('save')
-        console.log(this.props.previnfo)
+        //console.log('save')
+        //console.log(this.props.previnfo)
         axios.put('/modify',this.props.board)
         .then(()=>{
-               this.props.history.replace("/detail/"+this.props.match.params.bno)
+            this.props.history.replace("/detail/"+this.props.match.params.bno)
         })
-        .catch(()=>{
-
+        .catch((e)=>{
+            alert(e)
         })
     }
     render(){
-    //const {bno}=this.props.match.params
     const {previnfo}=this.props
-    console.log(previnfo)
-
-    
+    //console.log(previnfo)
     return (
     <MDBContainer>
         <MDBCard>
             <MDBCardHeader className="text-left">
                 <div className="d-block p-2">
-                <h2>게시글 수정</h2>
-                
-                </div>
-                
+                    <h2>게시글 수정</h2>
+                </div> 
             </MDBCardHeader>
             <MDBCardBody className="">
             <MDBInput
@@ -49,7 +43,6 @@ class BoardModify extends Component{
                     id="title"
                     onChange={this.handleChange}
                     value={previnfo.title}
-
                   />
             <MDBRow>
                 <MDBCol size="6">

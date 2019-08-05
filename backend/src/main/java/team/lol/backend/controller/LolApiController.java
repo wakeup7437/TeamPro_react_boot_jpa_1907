@@ -27,13 +27,13 @@ public class LolApiController {
     //소환사 검색
     @GetMapping("/search/{sName}")
     public Object searchSummoner(@PathVariable String sName){
-        System.out.println("=============SUMMONER SEARCH===============");
+        //System.out.println("=============SUMMONER SEARCH===============");
         return service.getSummoner(sName);
     }
     //최근 게임 리스트
     @GetMapping("/list/{accountId}")
     public Object searchList(@PathVariable String accountId,@RequestParam String startIndex){
-        System.out.println("startindex==: "+startIndex);
+        //System.out.println("startindex==: "+startIndex);
         int startIndexint=Integer.parseInt(startIndex);
         int endIndex=startIndexint+8;
         return service.getGameList(accountId, startIndexint, endIndex);

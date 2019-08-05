@@ -17,6 +17,4 @@ public class GameListDto {
     private int startIndex;
     private int endIndex;
 
-    //custom variable
-    //private SummonerDto user;
 }

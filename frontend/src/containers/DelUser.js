@@ -23,7 +23,7 @@ class DelUser extends Component{
   
     delete(e){
     e.preventDefault();
-    Axios.delete(`http://localhost:8080/users/delete/${JSON.parse(sessionStorage.getItem('uno'))}`)
+    Axios.delete(`/users/delete/${JSON.parse(sessionStorage.getItem('uno'))}`)
     .then(res=>{
         alert('계정 탈퇴! 이용해 주셔서 감사합니다.')
         this.props.logoutCheck()

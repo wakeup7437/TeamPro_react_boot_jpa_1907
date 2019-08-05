@@ -30,7 +30,7 @@ class Mypage extends Component{
         userName : this.state.userName
       }
       if(this.state.userName != ''){
-        Axios.put('http://localhost:8080/users/name',data)
+        Axios.put('/users/name',data)
         .then(res=>{
             if(res.data){
                alert("업데이트 성공")

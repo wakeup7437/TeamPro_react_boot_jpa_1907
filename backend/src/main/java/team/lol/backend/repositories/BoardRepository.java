@@ -17,6 +17,4 @@ public interface BoardRepository extends PagingAndSortingRepository<Board,Long>{
 
     @Query()
     public Object[] findByBno(Long bno);
-    //create
-    //update
 }

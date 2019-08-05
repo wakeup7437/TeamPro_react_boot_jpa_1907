@@ -16,7 +16,6 @@ class BoardWrite extends Component{
         console.log(this.state)
         axios.post('/board/insert',this.state)
         .then((d)=>{
-            alert("sucess: "+d.data)
             this.props.history.push('/board')
         })
         .catch(e=>{
@@ -24,7 +23,7 @@ class BoardWrite extends Component{
         })
     }
     cancel=()=>{
-        this.props.history.push('/')
+        this.props.history.push('/board')
     }
     handleChange=(e)=>{
         this.setState({
@@ -51,7 +50,7 @@ class BoardWrite extends Component{
                         className="d-inline browser-default custom-select inline"
                         id="category" onChange={this.handleChange}
                     >
-                    <option value="FREE">자유</option>
+                    <option value="FREE" selected>자유</option>
                     <option value="CATE1">CATEGORY1</option>
                     <option value="CATE2">CATEGORY2</option>
                     <option value="CATE3">CATEGORY3</option>
