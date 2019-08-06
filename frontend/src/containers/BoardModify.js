@@ -23,10 +23,17 @@ class BoardModify extends Component{
         this.props.history.push('/')
     }
     save=()=>{
+        let data={
+            bno:this.props.match.params.bno,
+            writer:this.props.login.userinfo.userName,
+            content:this.state.content,
+            category:this.state.category,
+            title:this.state.title
+        }
         console.log(this.props.login.userinfo.userName)
         this.setState({bno:this.props.match.params.bno,
             writer:this.props.login.userinfo.userName})
-        axios.put('/board/update',this.state)
+        axios.put('/board/update',data)
         .then(()=>{
             this.props.history.replace("/detail/"+this.props.match.params.bno)
         })

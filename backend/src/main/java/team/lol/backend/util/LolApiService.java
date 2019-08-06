@@ -25,7 +25,7 @@ public class LolApiService {
 
 
     private static final String API_URL="https://kr.api.riotgames.com";
-    private static final String API_KEY="RGAPI-bacc7f87-b6bb-44f3-b484-a2879353b986";
+    private static final String API_KEY="RGAPI-8162d778-f8c8-43ba-81d7-f11ea4777be8";
     private static final String HEADER_PARAM="X-Riot-Token";
 
     @Bean

@@ -84,10 +84,13 @@ public class BoardController {
         return result;
     }
     //수정
+    @Transactional
     @PutMapping("/update")
     public Boolean update(@RequestBody Board board){
         System.out.println("====update=====");
+        System.out.println(board);
         Board obj=repo.findByBno(board.getBno());
+        System.out.println(obj);
         obj.setTitle(board.getTitle());
         obj.setCategory(board.getCategory());
         obj.setContent(board.getContent());
