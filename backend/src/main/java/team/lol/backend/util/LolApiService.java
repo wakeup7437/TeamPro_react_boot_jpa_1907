@@ -25,7 +25,7 @@ public class LolApiService {
 
 
     private static final String API_URL="https://kr.api.riotgames.com";
-    private static final String API_KEY="RGAPI-8162d778-f8c8-43ba-81d7-f11ea4777be8";
+    private static String API_KEY="RGAPI-8162d778-f8c8-43ba-81d7-f11ea4777be8";
     private static final String HEADER_PARAM="X-Riot-Token";
 
     @Bean
@@ -35,6 +35,14 @@ public class LolApiService {
     @Autowired
     private RestTemplate rt;
     
+    public Boolean regenerate(String key){
+        API_KEY=key;
+        System.out.println("api_key="+API_KEY);
+        return true;
+    }
+
+
+
     //Sercice//
 
     public Object getSummoner(String sName){

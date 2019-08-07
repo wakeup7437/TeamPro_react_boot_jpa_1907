@@ -45,6 +45,11 @@ public class LolApiController {
         return service.getRanking();
     }
     
-    
+    //key regenerate
+    @GetMapping("/regenerate/{key}")
+    public Boolean reGenerate(@PathVariable String key){
+        return service.regenerate(key);
+    }
+
     
 }
