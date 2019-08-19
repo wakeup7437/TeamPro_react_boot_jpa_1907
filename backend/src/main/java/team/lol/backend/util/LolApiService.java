@@ -11,12 +11,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import team.lol.backend.domain.GameDto;
 import team.lol.backend.domain.GameListDto;
 import team.lol.backend.domain.MatchDto;
 import team.lol.backend.domain.PlayerDetailDto;
 import team.lol.backend.domain.PlayerDto;
-import team.lol.backend.domain.StatsDto;
 import team.lol.backend.domain.SummonerDto;
 import team.lol.backend.domain.UserInfo;
 
@@ -25,7 +23,7 @@ public class LolApiService {
 
 
     private static final String API_URL="https://kr.api.riotgames.com";
-    private static String API_KEY="RGAPI-8162d778-f8c8-43ba-81d7-f11ea4777be8";
+    private static String API_KEY="RGAPI-d4b6ebc9-b9c6-48fa-ac74-56fc9f7bf95a";
     private static final String HEADER_PARAM="X-Riot-Token";
 
     @Bean
@@ -34,6 +32,7 @@ public class LolApiService {
     }
     @Autowired
     private RestTemplate rt;
+
     
     public Boolean regenerate(String key){
         API_KEY=key;
@@ -44,44 +43,34 @@ public class LolApiService {
 
 
     //Sercice//
-
+    //기본전적
     public Object getSummoner(String sName){
-        System.out.println("=====GET SUMMONER====");
         SummonerDto dto1= getUnitInfoByNickName(sName);
         SummonerDto dto2=getUserLeagueBySummonerId(dto1.getId());
-        System.out.println("====line======");
+
         dto2.setProfileIconId(dto1.getProfileIconId());
         dto2.setName(dto1.getName());
         dto2.setSummonerLevel(dto1.getSummonerLevel());
         dto2.setAccountId(dto1.getAccountId());
         dto2.setId(dto1.getId());  
-        
-        System.out.println("=============GET SUMMONER END================");
         return dto2;
     }
+
+    //게임리스트
     public Object getGameList(String accountId,int startIndex,int endIndex){
         GameListDto map=getListByAccountId(accountId,startIndex,endIndex);
-        //System.out.println("=====list start=====");
-        
         //GameDto 
         map.getMatches().forEach(game->{
-            
-            //System.out.println("====start list one====");
             MatchDto match=getGameDetailByGameId(game.getGameId());
-            //System.out.println("====end list one=====");
             game.setGameDuration(match.getGameDuration());
-            //game.setMatch(match);
-            Integer id=new Integer(-1);
-
+            int id=-1;
             List<UserInfo> teams=new ArrayList<>();
-            for(PlayerDto p : match.getPlayersList()){
-                
+            for(PlayerDto p : match.getPlayersList()){        
                 Map<String,String> m=p.getPlayer();
                 if(accountId.equals(m.get("accountId"))){
                     p.setProfileIcon(m.get("profileIcon"));
                     p.setSummonerName(m.get("summonerName"));
                     id=p.getParticipantId();
-                    //System.out.println("==find==id: "+id);
                 }
                 UserInfo user=new UserInfo();
                 user.setParticipantId(p.getParticipantId());
@@ -89,15 +78,11 @@ public class LolApiService {
                 teams.add(user);
             }
             
-            final int intid=id;
-            //System.out.println("XXXXid?: "+id);
-            //여기서 팀원정보 가져올것
-            int teamId=-1;
+            //팀원정보
             for(int i=0;i<10;i++){
                 PlayerDetailDto pd= match.getParticipants().get(i);
                 UserInfo user=teams.get(i);
-                if(intid==pd.getParticipantId()){
-                    teamId=pd.getTeamId();
+                if(id==pd.getParticipantId()){
                     game.setStat(pd.getStats());
                     game.setWin(pd.getStats().getWin());
                 }

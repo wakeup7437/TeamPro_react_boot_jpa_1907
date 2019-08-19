@@ -1,7 +1,4 @@
 package team.lol.backend.domain;
-
-import java.util.List;
-
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
